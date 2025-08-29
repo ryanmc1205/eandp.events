@@ -6,16 +6,16 @@ const WhyHireCorporateEventPlannerAtlanta = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const url = "https://eandp.events/blog/why-smart-atlanta-companies-hire-event-planners";
-  const title = "Why Smart Atlanta Companies Choose Corporate Event Planners for High-Stakes Events | E&P Events";
+  const url =
+    "https://eandp.events/blog/why-smart-atlanta-companies-hire-event-planners";
+  const title =
+    "Why Smart Atlanta Companies Choose Corporate Event Planners for High-Stakes Events | E&P Events";
   const description =
     "High-stakes corporate events demand strategy, vendor leverage, and crisis-proof execution. Here’s why top Atlanta companies partner with expert planners to protect brand, team, and outcomes.";
-  const heroSrc = "/lovable-uploads/ChatGPT Image Jul 12, 2025, 10_52_15 AM.webp";
-  const ogImage = "https://eandp.events/lovable-uploads/77d9a347-7e81-4f55-827e-07598bec637f.png";
-
-  useEffect(() => {
-    document.title = title;
-  }, [title]);
+  const heroSrc =
+    "/lovable-uploads/ChatGPT Image Jul 12, 2025, 10_52_15 AM.webp";
+  const ogImage =
+    "https://eandp.events/lovable-uploads/77d9a347-7e81-4f55-827e-07598bec637f.png";
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -23,14 +23,20 @@ const WhyHireCorporateEventPlannerAtlanta = () => {
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: "https://eandp.events/" },
       { "@type": "ListItem", position: 2, name: "Blog", item: "https://eandp.events/blog" },
-      { "@type": "ListItem", position: 3, name: "Why Smart Atlanta Companies Choose Corporate Event Planners for High-Stakes Events", item: url },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Why Smart Atlanta Companies Choose Corporate Event Planners for High-Stakes Events",
+        item: url,
+      },
     ],
   };
 
   const blogPostingLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: "Why Smart Atlanta Companies Choose Corporate Event Planners for High-Stakes Events",
+    headline:
+      "Why Smart Atlanta Companies Choose Corporate Event Planners for High-Stakes Events",
     description,
     image: [`https://eandp.events${heroSrc.replace(/\s/g, "%20")}`],
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
@@ -40,32 +46,36 @@ const WhyHireCorporateEventPlannerAtlanta = () => {
       name: "E&P Events",
       logo: { "@type": "ImageObject", url: ogImage },
     },
-    // datePublished: "2025-07-12",
-    // dateModified: "2025-07-12",
+    datePublished: "2025-07-12",
+    dateModified: "2025-07-12",
     articleSection: "Corporate Events",
   };
 
   return (
     <>
-      <Helmet>
+      <Helmet prioritizeSeoTags>
         <title>{title}</title>
         <meta name="description" content={description} />
-
+        <meta name="robots" content="index,follow" />
         <link rel="canonical" href={url} />
 
-        <meta property="og:url" content={url} />
+        {/* Open Graph */}
         <meta property="og:type" content="article" />
+        <meta property="og:url" content={url} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={ogImage} />
 
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImage} />
 
+        {/* Performance */}
         <link rel="preload" as="image" href={heroSrc} type="image/webp" />
 
+        {/* Structured data */}
         <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
         <script type="application/ld+json">{JSON.stringify(blogPostingLd)}</script>
       </Helmet>
@@ -89,36 +99,54 @@ const WhyHireCorporateEventPlannerAtlanta = () => {
           </h1>
 
           <p className="text-lg mb-6">
-            Corporate events aren't just calendar fillers—they're high-visibility touchpoints for your brand, leadership, and culture. Whether it's an investor reception, leadership summit, or hybrid client showcase, expectations are high. So is the potential for missteps.
+            Corporate events aren't just calendar fillers—they're high-visibility touchpoints for your brand,
+            leadership, and culture. Whether it's an investor reception, leadership summit, or hybrid client
+            showcase, expectations are high. So is the potential for missteps.
           </p>
 
           <p className="text-lg mb-6">
-            Many Atlanta companies still try to manage these events in-house. It seems efficient on paper. But too often, what begins as a lean initiative turns into a pressure cooker—<a href="https://eandp.events/blog/hidden-costs-diy-corporate-events" className="text-blue-600 underline">costing far more in brand equity, time, and missed opportunity.</a>
+            Many Atlanta companies still try to manage these events in-house. It seems efficient on paper. But too
+            often, what begins as a lean initiative turns into a pressure cooker—
+            <a
+              href="https://eandp.events/blog/hidden-costs-diy-corporate-events"
+              className="text-blue-600 underline"
+            >
+              costing far more in brand equity, time, and missed opportunity.
+            </a>
           </p>
 
           <p className="text-lg mb-6">
-            At E&amp;P Events, we’ve guided executive teams through hundreds of high-stakes moments. The insight is consistent: what companies risk by going it alone isn’t just executional—it’s deeply strategic.
+            At E&amp;P Events, we’ve guided executive teams through hundreds of high-stakes moments. The insight is
+            consistent: what companies risk by going it alone isn’t just executional—it’s deeply strategic.
           </p>
 
           <h2 className="text-2xl font-semibold mt-10 mb-4">1. Strategic Objectives Fall Through the Cracks</h2>
           <p className="text-lg mb-4">
-            Corporate events should be aligned with your broader business strategy. Without professional planning, teams often deliver the wrong message to the right audience—or vice versa. Without clear KPIs, post-event reporting becomes guesswork.
+            Corporate events should be aligned with your broader business strategy. Without professional planning,
+            teams often deliver the wrong message to the right audience—or vice versa. Without clear KPIs, post-event
+            reporting becomes guesswork.
           </p>
           <p className="text-lg mb-4">
-            A strategic planner ensures alignment from the start, making sure every detail reinforces the outcomes your leadership team cares about most.
+            A strategic planner ensures alignment from the start, making sure every detail reinforces the outcomes
+            your leadership team cares about most.
           </p>
 
           <h2 className="text-2xl font-semibold mt-10 mb-4">2. Budget Oversight Becomes a Hidden Liability</h2>
           <p className="text-lg mb-4">
-            Even with a solid budget in place, DIY planning leads to missed vendor deals, surprise fees, and inefficient spending. Without long-standing vendor relationships or structured frameworks, the numbers quickly spiral.
+            Even with a solid budget in place, DIY planning leads to missed vendor deals, surprise fees, and
+            inefficient spending. Without long-standing vendor relationships or structured frameworks, the numbers
+            quickly spiral.
           </p>
           <p className="text-lg mb-4">
-            At E&amp;P Events, our flat-fee pricing and proactive vendor coordination ensure every dollar works harder and drives measurable value.
+            At E&amp;P Events, our flat-fee pricing and proactive vendor coordination ensure every dollar works
+            harder and drives measurable value.
           </p>
 
           <h2 className="text-2xl font-semibold mt-10 mb-4">3. Vendor Missteps Erode Your Credibility</h2>
           <p className="text-lg mb-4">
-            Most internal teams don’t have the bandwidth or industry insight to vet vendors deeply. We’ve seen the “reliable” AV team that misses deadlines or caterers who overcharge without warning. Contracts without clarity leave leadership exposed.
+            Most internal teams don’t have the bandwidth or industry insight to vet vendors deeply. We’ve seen the
+            “reliable” AV team that misses deadlines or caterers who overcharge without warning. Contracts without
+            clarity leave leadership exposed.
           </p>
           <p className="text-lg mb-4">
             Our trusted relationships and due diligence process help avoid those pitfalls—before they happen.
@@ -126,23 +154,29 @@ const WhyHireCorporateEventPlannerAtlanta = () => {
 
           <h2 className="text-2xl font-semibold mt-10 mb-4">4. Internal Teams Get Stretched—and Burned Out</h2>
           <p className="text-lg mb-4">
-            Event coordination isn’t a side task. When HR or marketing teams are pulled in, their primary focus suffers. Deadlines get missed. Stress increases. Talent gets depleted.
+            Event coordination isn’t a side task. When HR or marketing teams are pulled in, their primary focus
+            suffers. Deadlines get missed. Stress increases. Talent gets depleted.
           </p>
           <p className="text-lg mb-4">
-            We relieve internal pressure, allowing your people to lead where they’re strongest—<a href="/corporate" className="text-blue-600 underline">while we handle the complexity behind the scenes.</a>
+            We relieve internal pressure, allowing your people to lead where they’re strongest—
+            <a href="/corporate" className="text-blue-600 underline">while we handle the complexity behind the scenes.</a>
           </p>
 
           <h2 className="text-2xl font-semibold mt-10 mb-4">5. Executional Mistakes Damage Long-Term Trust</h2>
           <p className="text-lg mb-4">
-            At high-stakes events, small missteps echo loudly. A tech failure mid-keynote. An awkward transition. A cultural miscue. These aren’t just inconveniences—they’re brand risks.
+            At high-stakes events, small missteps echo loudly. A tech failure mid-keynote. An awkward transition. A
+            cultural miscue. These aren’t just inconveniences—they’re brand risks.
           </p>
           <p className="text-lg mb-4">
-            We specialize in protecting your message through polished, crisis-proof execution rooted in cultural fluency.
+            We specialize in protecting your message through polished, crisis-proof execution rooted in cultural
+            fluency.
           </p>
 
           <h2 className="text-2xl font-semibold mt-10 mb-4">6. You Miss the Strategic Lift a Planner Provides</h2>
           <p className="text-lg mb-4">
-            E&amp;P Events is more than a logistics provider. We align every element to your business goals, capture post-event insights, and help you track meaningful KPIs. The result? Events that inform future strategy—not just deliverables.
+            E&amp;P Events is more than a logistics provider. We align every element to your business goals, capture
+            post-event insights, and help you track meaningful KPIs. The result? Events that inform future
+            strategy—not just deliverables.
           </p>
 
           <h2 className="text-2xl font-semibold mt-10 mb-4">Why Atlanta’s Top Companies Trust E&amp;P Events</h2>
@@ -154,13 +188,22 @@ const WhyHireCorporateEventPlannerAtlanta = () => {
 
           <h2 className="text-2xl font-semibold mt-10 mb-4">Choose Strategy Over Stress</h2>
           <p className="text-lg mb-4">
-            In today’s business climate, events must do more than impress—they must perform. And performance starts with planning.
+            In today’s business climate, events must do more than impress—they must perform. And performance starts
+            with planning.
           </p>
           <p className="text-lg mb-4">
-            Cutting corners on corporate events may seem efficient now—but the long-term risks are real. Trust E&amp;P Events to protect your vision, brand, and team.
+            Cutting corners on corporate events may seem efficient now—but the long-term risks are real. Trust
+            E&amp;P Events to protect your vision, brand, and team.
           </p>
           <p className="text-lg font-semibold">
-            Ready to elevate your next event? <a href="https://cal.com/eandp.events/corporate-b2b-15" className="text-blue-600 underline">Contact us today</a> for a consultation built on clarity, experience, and results.
+            Ready to elevate your next event?{" "}
+            <a
+              href="https://cal.com/eandp.events/corporate-b2b-15"
+              className="text-blue-600 underline"
+            >
+              Contact us today
+            </a>{" "}
+            for a consultation built on clarity, experience, and results.
           </p>
         </div>
       </div>
