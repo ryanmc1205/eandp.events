@@ -1,17 +1,58 @@
-import React, { useState, useEffect } from "react";
+"use client";
+
+import React, { useState, useEffect, useMemo } from "react";
+import { getCalApi } from "@calcom/embed-react";
+
+const CORPORATE_CAL_LINK = "eandp.events/corporate-b2b-15"; // your Cal slug
 
 const NavBarCorporate = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEventsOpen, setIsEventsOpen] = useState(false);
 
+  // append current UTM to calLink for attribution
+  const calLinkWithUtm = useMemo(() => {
+    if (typeof window === "undefined") return CORPORATE_CAL_LINK;
+    const qs = window.location.search.replace(/^\?/, "");
+    return qs ? `${CORPORATE_CAL_LINK}?${qs}` : CORPORATE_CAL_LINK;
+  }, []);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
+
+    // Init Cal UI (scoped to this page)
+    (async () => {
+      const cal = await getCalApi({ namespace: "eandp-modal" });
+      cal("ui", {
+        theme: "light",
+        styles: { branding: { brandColor: "#d4af37" } }, // your gold accent
+      });
+
+      // Optional: track successful bookings (GA4)
+      cal("on", {
+        eventType: "bookingSuccessful",
+        callback: (payload: any) => {
+          (window as any).gtag?.("event", "cal_booking_success", {
+            method: "cal_modal",
+            eventType: payload?.data?.eventType?.slug,
+            page_path: window.location.pathname,
+          });
+          // Optional redirect after Cal confirmation:
+          // window.location.href = "/thanks";
+        },
+      });
+    })();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const openCal = async (e?: React.MouseEvent) => {
+    // prevent default if wrapped in an <a>
+    e?.preventDefault?.();
+    const cal = await getCalApi({ namespace: "eandp-modal" });
+    cal("open", { calLink: calLinkWithUtm });
+  };
 
   return (
     <nav
@@ -35,13 +76,7 @@ const NavBarCorporate = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             {isMenuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             ) : (
@@ -77,11 +112,10 @@ const NavBarCorporate = () => {
             </div>
           </div>
 
-          {/* Book a Call Button (desktop only) */}
+          {/* Book a Call Button (desktop only) — NOW OPENS MODAL */}
           <a
-            href="https://cal.com/eandp.events/corporate-b2b-15"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`https://cal.com/${CORPORATE_CAL_LINK}`} // graceful fallback if JS off
+            onClick={openCal}
             className="ml-6 inline-flex items-center rounded-md bg-gold px-5 py-2 text-sm font-semibold text-[#2a2a2a] shadow-md hover:bg-[#d4af37] hover:shadow-lg transition-all duration-200"
           >
             Book a Call
@@ -108,8 +142,7 @@ const NavBarCorporate = () => {
               Events
               <svg
                 className={`ml-2 h-4 w-4 transition-transform duration-200 ${isEventsOpen ? "rotate-180" : ""}`}
-                viewBox="0 0 20 20"
-                fill="currentColor"
+                viewBox="0 0 20 20" fill="currentColor"
               >
                 <path
                   fillRule="evenodd"
@@ -124,6 +157,15 @@ const NavBarCorporate = () => {
                 <a href="/corporate" className="text-black hover:text-gold" onClick={() => setIsMenuOpen(false)}>Corporate</a>
               </div>
             )}
+
+            {/* Optional: Mobile "Book a Call" button that opens modal */}
+            <a
+              href={`https://cal.com/${CORPORATE_CAL_LINK}`}
+              onClick={(e) => { setIsMenuOpen(false); openCal(e); }}
+              className="mt-2 inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 text-sm font-semibold text-[#2a2a2a] shadow-md"
+            >
+              Book a Call
+            </a>
           </div>
         </div>
       )}
