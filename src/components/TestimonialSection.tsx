@@ -58,9 +58,9 @@ type Props = {
 
 const TestimonialSection: React.FC<Partial<Props>> = ({
   testimonials: incomingTestimonials,
-  title = "When You Know You Picked the Right Planner",
-  backgroundColor = "bg-transparent",
-  titleColor = "text-black",
+  title = "Here’s How They Remember It.",
+  backgroundColor = "bg-charcoal",
+  titleColor = "text-white",
   minHeight = "min-h-[700px] md:min-h-[540px]", // Default height set here
 }) => {
   const testimonialsToUse = incomingTestimonials ?? testimonials;

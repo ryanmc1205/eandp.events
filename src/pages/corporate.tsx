@@ -2,24 +2,11 @@ import React from "react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Helmet } from 'react-helmet-async';
-import SchemaMarkup from "@/components/SchemaMarkup";
 import { Check, Globe, Users, Facebook, Instagram, Mail } from "lucide-react";
 import NavBarCorporate from "@/components/NavBarCorporate";
 import { corporateGalleryImages } from "@/data/corporategallery";
 import TestimonialSection from "@/components/TestimonialSection";
-
-
-
-
-
-// Inside your component’s return block:
-<Helmet>
-  <title>Corporate Event Planning in Atlanta | Strategic & Executive Events | E&P Events</title>
-  <meta name="description" content="E&P Events elevates corporate event planning in Atlanta — strategically executing summits, brand activations, and executive experiences." />
-  <link rel="canonical" href="https://eandp.events/corporate" />
-</Helmet>
-
-
+import SchemaMarkup from "@/components/SchemaMarkup";
 
 const weddingTestimonials = [
   {
@@ -47,7 +34,6 @@ He also demonstrated excellent people management skills, guiding volunteers with
   }
 ];
 
-
 const Corporate = () => {
   const location = useLocation();
 
@@ -65,15 +51,66 @@ const Corporate = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Corporate Event Planning in Atlanta | Strategic & Executive Events | E&P Events</title>
-        <meta
-          name="description"
-          content="E&P Events elevates corporate event planning in Atlanta — strategically executing summits, brand activations, and executive experiences."
-        />
-        <link rel="canonical" href="https://eandp.events/corporate" />
-      </Helmet>
+    <Helmet>
+  <title>Corporate Event Planning in Atlanta | Strategic & Executive Events | E&P Events</title>
+  <meta
+    name="description"
+    content="E&P Events elevates corporate event planning in Atlanta — strategically executing summits, brand activations, and executive experiences."
+  />
 
+  {/* Canonical */}
+  <link rel="canonical" href="https://eandp.events/corporate" />
+
+  {/* Preload Hero Image for Speed */}
+  <link
+    rel="preload"
+    as="image"
+    href="/lovable-uploads/corp3_cropped.webp"
+    type="image/webp"
+  />
+
+  {/* Open Graph */}
+  <meta property="og:url" content="https://eandp.events/corporate" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Corporate Event Planning in Atlanta | Strategic & Executive Events | E&P Events" />
+  <meta property="og:description" content="E&P Events elevates corporate event planning in Atlanta — strategically executing summits, brand activations, and executive experiences." />
+  <meta property="og:image" content="https://eandp.events/og/corporate.jpg" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Corporate Event Planning in Atlanta | Strategic & Executive Events | E&P Events" />
+  <meta name="twitter:description" content="E&P Events elevates corporate event planning in Atlanta — strategically executing summits, brand activations, and executive experiences." />
+  <meta name="twitter:image" content="https://eandp.events/og/corporate.jpg" />
+</Helmet>
+
+
+
+      {/* Service schema (Corporate) */}
+      <SchemaMarkup
+        type="Service"
+        id="https://eandp.events/#org"
+        name="E & P Events"
+        url="https://eandp.events"
+        serviceUrl="https://eandp.events/corporate"
+        serviceType="Corporate Event Planning"
+        description="Corporate event planning in Atlanta for summits, brand activations, and executive experiences—delivered with strategy, precision, and cultural fluency."
+        areaServedName="Atlanta, GA"
+      />
+
+      {/* Breadcrumbs */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://eandp.events/" },
+              { "@type": "ListItem", position: 2, name: "Corporate", item: "https://eandp.events/corporate" }
+            ]
+          })
+        }}
+      />
 
       <div className="min-h-screen bg-transparent flex flex-col">
         <NavBarCorporate />
@@ -81,23 +118,39 @@ const Corporate = () => {
         {/* Hero Section */}
         <section
           id="hero"
-          className="relative min-h-screen flex flex-col justify-center pt-24 pb-12 px-6 md:px-12 lg:px-16 bg-cover bg-center text-white"
-          style={{
-            backgroundImage: "url('/lovable-uploads/corp3_cropped.png')",
-          }}
+          className="relative min-h-screen flex flex-col justify-center pt-24 pb-12 px-6 md:px-12 lg:px-16 text-white overflow-hidden"
         >
-          <div className="absolute inset-0 bg-black/30 z-0" />
+          {/* Hero Image */}
+          <img
+            src="/lovable-uploads/corp3_cropped.webp"
+            alt="Corporate event planning background"
+            className="absolute inset-0 w-full h-full object-cover z-0"
+            loading="eager"
+            width={1920}
+            height={1080}
+          />
 
-          <div className="relative z-10 text-center w-full px-4">
-       <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-snug max-w-[75rem] mx-auto">
-  Your Event Deserves More Than a Run of Show. It Deserves Strategy.
-</h1>
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/30 z-10" />
+
+          {/* Headline */}
+          <div className="relative z-20 text-center w-full px-4">
+            <h1 className="text-sm md:text-base tracking-widest uppercase text-white/80 mb-3">
+              Corporate Event Planner in Atlanta
+            </h1>
+
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-snug max-w-[75rem] mx-auto">
+              Your Event Deserves More Than a Run of Show. It Deserves Strategy.
+            </h2>
           </div>
 
-          <div className="relative z-10 max-w-4xl text-center mx-auto">
-           <p className="text-lg md:text-xl max-w-3xl mb-10 text-white/90 mx-auto">
-  Based in Atlanta, we specialize in corporate event planning that transcends logistics. From executive summits to brand activations, we align purpose with precision—leading with structure, cultural fluency, and decades of experience.
-</p>
+          {/* Subtext and CTA */}
+          <div className="relative z-20 max-w-4xl text-center mx-auto">
+            <p className="text-lg md:text-xl max-w-3xl mb-10 text-white/90 mx-auto">
+              Based in Atlanta, we specialize in corporate event planning that transcends logistics.
+              From executive summits to brand activations, we align purpose with precision—leading with structure,
+              cultural fluency, and decades of experience.
+            </p>
 
             <div className="flex justify-center">
               <a
@@ -109,7 +162,8 @@ const Corporate = () => {
             </div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-20">
             <a href="#what-we-do" aria-label="Scroll down">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,9 +191,9 @@ const Corporate = () => {
         >
           <div className="text-center mb-16">
             <h2 className="section-title text-white">What You Need from an Atlanta Corporate Event Planner</h2>
-         <p className="text-lg max-w-3xl mx-auto text-white">
-  Planning an Atlanta-based, high-stakes corporate event means juggling timelines, stakeholder expectations, and brand integrity—often under intense pressure. Most planners coordinate. We take ownership, so you can lead the room, not run it.
-</p>
+            <p className="text-lg max-w-3xl mx-auto text-white">
+              Planning an Atlanta-based, high-stakes corporate event means juggling timelines, stakeholder expectations, and brand integrity—often under intense pressure. Most planners coordinate. We take ownership, so you can lead the room, not run it.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -169,7 +223,6 @@ const Corporate = () => {
           </div>
         </section>
 
-
         {/* How It Works Section */}
         <section id="how-it-works" className="bg-transparent py-20 px-6 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto">
@@ -194,81 +247,74 @@ const Corporate = () => {
           </div>
         </section>
 
-     {/* Testimonial Section */}
-<TestimonialSection
-  testimonials={weddingTestimonials}
-  title="What They're Saying"
-  backgroundColor="bg-[#2a2a2a]"
-  titleColor="text-white"
-/>
-
-
-{/* Featured Partners Section */}
-<section id="partners" className="section-container bg-white text-black py-20">
-  <div className="max-w-6xl mx-auto text-center">
-    <h2 className="section-title text-black text-center mx-auto">
-      Proven by Partnerships That Demand Precision
-    </h2>
-
-
-
-    {/* Top row */}
-    <div className="flex flex-wrap justify-center items-center gap-12 mt-12">
-
-   <div className="max-w-[400px] w-full flex items-center justify-center">
-        <img 
-          src="/lovable-uploads/emory-logo.jpeg" 
-          alt="Emory School of Nursing" 
-          className="w-full h-auto object-contain"
+        {/* Testimonial Section */}
+        <TestimonialSection
+          testimonials={weddingTestimonials}
+          title="What They're Saying"
+          backgroundColor="bg-[#2a2a2a]"
+          titleColor="text-white"
         />
-      </div>
 
-      <div className="max-w-[400px] w-full flex items-center justify-center">
-        <img 
-          src="/lovable-uploads/LNRS_RGB_POS_300.png" 
-          alt="LexisNexis Risk Solutions" 
-          className="w-full h-auto object-contain"
-        />
-      </div>
-    </div>
+        {/* Featured Partners Section */}
+        <section id="partners" className="section-container bg-white text-black py-20">
+          <div className="max-w-6xl mx-auto text-center">
+            <h2 className="section-title text-black text-center mx-auto">
+              Proven by Partnerships That Demand Precision
+            </h2>
 
-    {/* Bottom row */}
-    <div className="flex flex-wrap justify-center items-center gap-16 mt-10">
-      <div className="max-w-[220px] w-full flex items-center justify-center">
-        <img 
-          src="/lovable-uploads/GCC-Logo.png" 
-          alt="GateCity Church" 
-          className="w-full h-auto object-contain"
-        />
-      </div>
-      <div className="max-w-[220px] w-full flex items-center justify-center">
-        <img 
-          src="/lovable-uploads/IMG_3344.PNG" 
-          alt="G3ict" 
-          className="w-full h-auto object-contain"
-        />
-      </div>
-      <div className="max-w-[220px] w-full flex items-center justify-center">
-        <img 
-          src="/lovable-uploads/FUT001_Logo_Screen_V2_RGB_B-c_black.png" 
-          alt="Futures Church" 
-          className="w-full h-auto object-contain"
-        />
-      </div>
-    </div>
-  </div>
-</section>
+            {/* Top row */}
+            <div className="flex flex-wrap justify-center items-center gap-12 mt-12">
+              <div className="max-w-[400px] w-full flex items-center justify-center">
+                <img loading="lazy"
+                  src="/lovable-uploads/emory-logo.jpeg"
+                  alt="Emory School of Nursing"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
 
-  {/* About Section */}
- <h2 className="section-title">Corporate Event Planner in Atlanta</h2>
-<section className="text-lg text-black my-12 max-w-4xl mx-auto text-center">
-  <p>
-  Looking for a strategic <b>corporate event planner in Atlanta</b>? With over a decade of experience, E&P Events partners with executive teams, nonprofits, and brands to produce high-impact summits, launches, and activations — all with precision and cultural fluency. Whether you need a full-service event team or a partner to handle the details, our Atlanta-based planners bring experience, speed, and results.
-  </p>
-</section>
+              <div className="max-w-[400px] w-full flex items-center justify-center">
+                <img loading="lazy"
+                  src="/lovable-uploads/LNRS_RGB_POS_300.png"
+                  alt="LexisNexis Risk Solutions"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
 
+            {/* Bottom row */}
+            <div className="flex flex-wrap justify-center items-center gap-16 mt-10">
+              <div className="max-w-[220px] w-full flex items-center justify-center">
+                <img loading="lazy"
+                  src="/lovable-uploads/GCC-Logo.png"
+                  alt="GateCity Church"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              <div className="max-w-[220px] w-full flex items-center justify-center">
+                <img loading="lazy"
+                  src="/lovable-uploads/IMG_3344.PNG"
+                  alt="G3ict"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              <div className="max-w-[220px] w-full flex items-center justify-center">
+                <img loading="lazy"
+                  src="/lovable-uploads/FUT001_Logo_Screen_V2_RGB_B-c_black.png"
+                  alt="Futures Church"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
 
-
+        {/* About Section */}
+        <h2 className="section-title">Corporate Event Planner in Atlanta</h2>
+        <section className="text-lg text-black my-12 max-w-4xl mx-auto text-center">
+          <p>
+            Looking for a strategic <b>corporate event planner in Atlanta</b>? With over a decade of experience, E&amp;P Events partners with executive teams, nonprofits, and brands to produce high-impact summits, launches, and activations — all with precision and cultural fluency. Whether you need a full-service event team or a partner to handle the details, our Atlanta-based planners bring experience, speed, and results.
+          </p>
+        </section>
 
         {/* CTA Section */}
         <section
@@ -281,39 +327,28 @@ const Corporate = () => {
 
           <div className="relative z-10 max-w-4xl mx-auto text-center">
             <h2 className="section-title text-white">Lead the Room. We’ll Run the Rest.</h2>
-          <p className="text-lg mb-10 max-w-2xl mx-auto text-white/90">
-  Let’s build a corporate event that drives outcomes. Our Atlanta-based team blends strategic planning with cultural fluency and flawless execution — so your message lands exactly where it should.
-</p>
+            <p className="text-lg mb-10 max-w-2xl mx-auto text-white/90">
+              Let’s build a corporate event that drives outcomes. Our Atlanta-based team blends strategic planning with cultural fluency and flawless execution — so your message lands exactly where it should.
+            </p>
 
             <div className="glow-button-wrapper mx-auto">
               <div className="glow-ring" />
-          <a
-  href="https://cal.com/eandp.events/corporate-b2b-15"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="glow-button-inner"
-  onClick={() => {
-    window.gtag?.('event', 'cta_click', {
-      button_text: 'Book Your Planning Consult',
-      cta_type: 'corporate_cta',
-      page_path: window.location.pathname,
-    });
-  }}
->
-  Book Your Planning Consult
-</a>
-
+              <a
+                href="https://cal.com/eandp.events/corporate-b2b-15"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glow-button-inner"
+                onClick={() => {
+                  (window as any).gtag?.('event', 'cta_click', {
+                    button_text: 'Book Your Planning Consult',
+                    cta_type: 'corporate_cta',
+                    page_path: window.location.pathname,
+                  });
+                }}
+              >
+                Book Your Planning Consult
+              </a>
             </div>
-
-            {/*       <div className="mt-8">
-              <p className="text-base text-white/80 max-w-md mx-auto">
-                Or email us at {" "}
-                <a href="mailto:info@eandp.events" className="text-gold hover:underline">
-                  info@eandp.events
-                </a>
-                . You'll get a response from a real person — not a bot, not a sales script.
-              </p>
-            </div> */}
 
             <div className="mt-8">
               <a href="/" className="text-gold underline">
@@ -321,16 +356,15 @@ const Corporate = () => {
               </a>
             </div>
           </div>
-      </section>
-<Footer />
-</div>
+        </section>
 
+        <Footer />
+      </div>
 
       <div className="lion-watermark" aria-hidden="true" />
     </>
   );
 };
-
 
 // Footer Component
 const Footer = () => {
@@ -338,39 +372,38 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#333333] text-white py-12">
-
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
-            <h3 className="text-xl font-bold mb-4">E&P Events</h3> 
-<p className="text-gray-300 mb-4">
-  Experts in South Asian wedding planning, fusion weddings, corporate events, and more.<br />
-  <br />
-  Based in Atlanta, trusted across Georgia and beyond.
-</p>
+            <h3 className="text-xl font-bold mb-4">E&P Events</h3>
+            <p className="text-gray-300 mb-4">
+              Experts in South Asian wedding planning, fusion weddings, corporate events, and more.<br />
+              <br />
+              Based in Atlanta, trusted across Georgia and beyond.
+            </p>
 
             <div className="mt-4 flex items-center space-x-4">
-              <a 
-                href="https://www.facebook.com/eventsep/" 
-                target="_blank" 
+              <a
+                href="https://www.facebook.com/eventsep/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-gold transition-colors"
                 aria-label="Visit our Facebook"
               >
                 <Facebook size={24} />
               </a>
-              <a 
-                href="https://www.instagram.com/eandp_events/" 
-                target="_blank" 
+              <a
+                href="https://www.instagram.com/eandp_events/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-gold transition-colors"
                 aria-label="Visit our Instagram"
               >
                 <Instagram size={24} />
               </a>
-<a 
-                href="mailto:info@eandp.events" 
-                target="_blank" 
+              <a
+                href="mailto:info@eandp.events"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-gold transition-colors"
                 aria-label="Contact Us"
@@ -379,7 +412,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          
+
           <div>
             <h3 className="text-xl font-bold mb-4">Navigation</h3>
             <ul className="space-y-2">
@@ -400,7 +433,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#partners" className="text-gray-300 hover:text-gold transition-colors">
-                 Partners
+                  Partners
                 </a>
               </li>
               <li>
@@ -409,57 +442,36 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                 <a href="/blog"  className="text-gray-300 hover:text-gold transition-colors">
+                <a href="/about" className="text-gray-300 hover:text-gold transition-colors">
+                  About
+                </a>
+              </li>
+              <li>
+                <a href="/blog"  className="text-gray-300 hover:text-gold transition-colors">
                   Blog
                 </a>
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="text-xl font-bold mb-4">Contact</h3>
             <p className="text-gray-300 mb-2">
-              Email: <a href="mailto:info@events-ep.com" className="text-gold hover:underline">info@eandp.events</a>
+              Email: <a href="mailto:info@eandp.events" className="text-gold hover:underline">info@eandp.events</a>
+            </p>
+  <p className="text-gray-300 mb-2">
+              Phone: <a href="tel:17704108302" className="text-gold hover:underline">(770) 410-8302</a>
             </p>
             <p className="text-gray-300">
-              Atlanta, GA
+             Hoschton, GA
             </p>
           </div>
         </div>
-        
+
         <div className="border-t border-gray-800 mt-12 pt-6 text-center text-sm text-gray-400">
           <p>&copy; {currentYear} E&P Events. All rights reserved.</p>
         </div>
       </div>
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      name: "E and P Events",
-      image: "https://eandp.events/logo.png",
-      url: "https://eandp.events/corporate",
-      telephone: "+1-770-410-8302",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "1691 Ashbury Park Dr.",
-        addressLocality: "Hoschton",
-        addressRegion: "GA",
-        postalCode: "30548",
-        addressCountry: "US",
-      },
-      priceRange: "$$$",
-      description:
-        "Corporate event planner in Atlanta offering strategic execution for summits, brand activations, and nonprofit galas.",
-      sameAs: [
-        "https://www.instagram.com/eandp_events/",
-        "https://www.facebook.com/eventsep/",
-        "https://www.theknot.com/marketplace/eandp-events-alpharetta-ga-1055902",
-      ],
-    }),
-  }}
-/>
     </footer>
   );
 };

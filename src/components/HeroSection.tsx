@@ -4,24 +4,39 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center pt-24 pb-12 px-4 bg-cover bg-center"
-      style={{ backgroundImage: "url('/lovable-uploads/SSTK_asset_small_new.jpg')" }}
+      className="relative min-h-screen flex flex-col justify-center pt-24 pb-12 px-4 text-white overflow-hidden"
     >
+      {/* Hero Image */}
+      <img
+        src="/lovable-uploads/SSTK_asset_small_new.webp"
+        alt="Indian wedding and corporate event planner in Atlanta"
+        width={1920}
+        height={1080}
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black opacity-30 z-0"></div>
+      <div className="absolute inset-0 bg-black/30 z-0" />
 
       {/* Headline */}
       <div className="relative z-10 text-center w-full px-4">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-white leading-snug max-w-[75rem] mx-auto">
-          When the Stakes Are High, You’ve Got One Shot to Get It Right.
+        <h1 className="text-3xl md:text-5xl font-bold mb-8 md:mb-10 text-white leading-snug max-w-[75rem] mx-auto text-shadow">
+          Some Moments Are Too Important to Spend Managing Them.
         </h1>
       </div>
 
-      {/* Subhead: Mobile (short) */}
+      {/* Mobile */}
       <div className="container mx-auto max-w-3xl text-center z-10 block md:hidden mb-6">
-        <p className="text-white text-lg mb-4">
-          Weddings. Corporate launches. Once-in-a-lifetime moments deserve precision and purpose.
+        <p className="text-white text-lg mb-5 text-shadow">
+          The event is yours. Carrying it alone shouldn't be.
         </p>
+
+        <p className="text-white text-lg mb-8 text-shadow">
+          Whether you're navigating family traditions or stakeholder expectations, we lead with calm, precision, and cultural fluency so you can simply be present.
+        </p>
+
         <div className="flex justify-center">
           <a
             href="#contact"
@@ -32,15 +47,14 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Subhead: Desktop (longer) */}
+      {/* Desktop */}
       <div className="container mx-auto max-w-4xl text-center z-10 hidden md:block animate-fade-in">
-        <p className="text-lg md:text-xl mb-6 text-white max-w-3xl mx-auto">
-          Some moments only happen once. Whether you're planning a South Asian wedding, executive event, fusion celebration, or a high-impact corporate launch, E&P Events helps you make them unforgettable.
+        <p className="text-lg md:text-xl mb-6 text-white max-w-3xl mx-auto text-shadow">
+          The event is yours. Carrying it alone shouldn't be.
         </p>
 
-        <p className="text-lg md:text-xl mb-10 text-white max-w-3xl mx-auto">
-          We lead with strategy and deliver with precision—backed by cultural fluency and operational excellence.
-          Whether navigating brand goals or family dynamics, we build a plan that holds up — so you can be fully present.
+        <p className="text-lg md:text-xl mb-10 text-white max-w-3xl mx-auto text-shadow">
+          Whether you're navigating family traditions or stakeholder expectations, we lead with calm, precision, and cultural fluency so you can simply be present.
         </p>
 
         <div className="flex justify-center">

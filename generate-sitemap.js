@@ -1,44 +1,69 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// 🔧 Required for __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const BASE_URL = 'https://www.eandp.events';
 
-const staticRoutes = [
-  '/',
-  '/weddings',
-  '/corporate',
-  '/5-questions',
-  '/blog',
+const BASE = 'https://eandp.events';
+
+
+// 1) Static routes
+const staticUrls = [
+  { loc: '/',               changefreq: 'monthly', priority: '1.0' },
+  { loc: '/weddings',       changefreq: 'monthly', priority: '0.9' },
+  { loc: '/corporate',      changefreq: 'monthly', priority: '0.9' },
+  { loc: '/5-questions',    changefreq: 'monthly', priority: '0.8' },
+  { loc: '/blog',           changefreq: 'weekly',  priority: '0.8' },
 ];
 
-const blogPostsDir = path.join(__dirname, 'src/pages/blog/');
-const files = await fs.readdir(blogPostsDir);
+// 2) Dynamic blog routes from src/data/blog.json
+const blogJsonPath = path.resolve(__dirname, 'src/data/blog.json');
 
+let blogPosts = [];
+try {
+  const raw = fs.readFileSync(blogJsonPath, 'utf8');
+  blogPosts = JSON.parse(raw);
+} catch (err) {
+  console.warn(`[sitemap] Could not read ${blogJsonPath}. Proceeding without blog posts.`);
+}
 
-const blogSlugs = files
-  .filter(file => file.endsWith('.tsx'))
-  .map(file => `/blog/${file.replace('.tsx', '')}`);
+const blogUrls = (blogPosts || []).map((p) => ({
+  loc: `/blog/${p.slug}`,
+  changefreq: 'monthly',
+  priority: '0.7',
+  lastmod: p.lastmod || p.datePublished, // prefer lastmod if present
+}));
 
-const allRoutes = [...staticRoutes, ...blogSlugs];
+// 3) Build <url> entries
+const toUrlXml = ({ loc, changefreq, priority, lastmod }) => {
+  const lines = [
+    `  <url>`,
+    `    <loc>${BASE}${loc}</loc>`,
+    changefreq ? `    <changefreq>${changefreq}</changefreq>` : null,
+    priority ?   `    <priority>${priority}</priority>`       : null,
+    lastmod ?    `    <lastmod>${lastmod}</lastmod>`           : null,
+    `  </url>`,
+  ].filter(Boolean);
+  return lines.join('\n');
+};
 
-const sitemapEntries = allRoutes.map(route => `
-  <url>
-    <loc>${BASE_URL}${route}</loc>
-    <changefreq>monthly</changefreq>
-    <priority>${route === '/' ? '1.0' : '0.7'}</priority>
-  </url>
-`).join('');
+const allUrls = [...staticUrls, ...blogUrls]
+  // de-dupe just in case
+  .filter((v, i, arr) => i === arr.findIndex(x => x.loc === v.loc));
 
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemapEntries}
-</urlset>`;
+// 4) Write the final XML to public/sitemap.xml
+const xml =
+  `<?xml version="1.0" encoding="UTF-8"?>\n` +
+  `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+  `${allUrls.map(toUrlXml).join('\n')}\n` +
+  `</urlset>\n`;
 
-await fs.writeFile(path.join(__dirname, 'public/sitemap.xml'), sitemap);
+const outDir = path.resolve(__dirname, 'public');
+const outFile = path.join(outDir, 'sitemap.xml');
 
-console.log('Sitemap generated at public/sitemap.xml');
+if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+fs.writeFileSync(outFile, xml, 'utf8');
+
+console.log(`[sitemap] Wrote ${allUrls.length} URLs to ${path.relative(process.cwd(), outFile)}`);

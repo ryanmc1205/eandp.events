@@ -3,22 +3,21 @@ import React from "react";
 
 const GallerySection = () => {
   const galleryImages = [
-    "/lovable-uploads/RAGartistry-1629-3_cropped.jpg",
-    "/lovable-uploads/RAGartistry-9023-2_cropped.jpg",
-    "/lovable-uploads/suparnasaurabh12_cropped.jpg",
-    "/lovable-uploads/Shivani_Sagar-3729.jpg", 
-    "/lovable-uploads/keriadam-w0199-x3.jpg",
-    "/lovable-uploads/fenglongphoto-7146-preview-jpeg.jpg"
+    "/lovable-uploads/RAGartistry-1629-3_cropped.webp",
+    "/lovable-uploads/RAGartistry-9023-2_cropped.webp",
+    "/lovable-uploads/suparnasaurabh12_cropped.webp",
+    "/lovable-uploads/Shivani_Sagar-3729.webp", 
+    "/lovable-uploads/keriadam-w0199-x3.webp",
+    "/lovable-uploads/fenglongphoto-7146-preview-jpeg.webp"
   ];
 
   return (
     <section id="gallery" className="section-container bg-charcoal text-white py-20">
       <div className="max-w-6xl mx-auto">
-        <h2 className="section-title text-white text-center"> Precision You Can See. Peace You Can Feel.</h2>
+        <h2 className="section-title text-white text-center">Now, See for Yourself.</h2>
       <p className="text-lg mb-12 text-center">
        <div className="text-center text-white space-y-4 text-lg md:text-xl">
-  <p>Every photo here is from a real event—not a styled shoot.</p>
-  <p>Real families. Real timelines. Real harmony.</p>
+  <p>Real moments. Real memories.</p>
 </div>
 
 
@@ -30,7 +29,7 @@ const GallerySection = () => {
               key={index} 
               className="overflow-hidden rounded-md aspect-square hover:shadow-lg transition-shadow cursor-pointer group relative"
             >
-              <img
+              <img loading="lazy"
                 src={image}
                 alt={`Wedding event photo ${index + 1}`}
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"

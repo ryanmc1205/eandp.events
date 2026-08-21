@@ -112,6 +112,15 @@
     contain: layout paint;
   }
 
+  /* --- Text Shadow Utilities --- */
+  .text-shadow {
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+  }
+
+  .text-shadow-heading {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  }
+
   @media (max-width: 768px) {
     .lion-watermark {
       display: none !important;
@@ -123,11 +132,11 @@
   }
 
   .animate-marquee {
-    animation: marquee 60s linear infinite;
+    animation: marquee 120s linear infinite;
   }
 
   .animate-marquee-reverse {
-    animation: marqueeReverse 80s linear infinite; /* ✅ fixed comment */
+    animation: marquee 120s linear infinite reverse;
   }
 
   .marquee-wrapper {
@@ -150,6 +159,7 @@
       #c9a75d 100%
     );
   }
+
   100% {
     background: conic-gradient(
       from 360deg,
@@ -167,6 +177,7 @@
     opacity: 0.6;
     transform: scale(1);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.05);
@@ -177,28 +188,20 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+  0% {
+    transform: translateX(0);
+  }
 
-.animate-marquee {
-  animation: marquee 120s linear infinite;
-}
-
-.animate-marquee-reverse {
-  animation: marquee 120s linear infinite reverse; /* 👈 REVERSE the direction, not the translate */
-}
-
-.marquee-wrapper {
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes fade-in {
@@ -206,6 +209,7 @@
     opacity: 0;
     transform: translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -215,11 +219,10 @@
 .animate-fade-in {
   animation: fade-in 1.4s ease-out 0.5s forwards;
 }
+
 /* --- Mobile Hero Image Position Fix --- */
 @media (max-width: 768px) {
-  #hero {
-    background-position: 40% center;
+  #hero img {
+    object-position: 40% center;
   }
 }
-
-

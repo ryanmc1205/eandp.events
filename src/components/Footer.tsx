@@ -12,10 +12,10 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">E&P Events</h3> 
 <p className="text-gray-300 mb-4">
-  Experts in South Asian wedding planning, fusion weddings, corporate events, and more.<br />
-  <br />
-  Based in Atlanta, trusted across Georgia and beyond.
-</p>
+Thoughtful planning for Indian, South Asian, and fusion weddings + corporate events.<br />
+              <br />
+              Based in Atlanta, trusted across Georgia and beyond.
+            </p>
 
             <div className="mt-4 flex items-center space-x-4">
               <a 
@@ -82,6 +82,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
+                <a href="/about" className="text-gray-300 hover:text-gold transition-colors">
+                  About
+                </a>
+              </li>
+              <li>
                  <a href="/blog"  className="text-gray-300 hover:text-gold transition-colors">
                   Blog
                 </a>
@@ -92,10 +97,10 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">Contact</h3>
             <p className="text-gray-300 mb-2">
-              Email: <a href="mailto:info@events-ep.com" className="text-gold hover:underline">info@eandp.events</a>
+              Email: <a href="mailto:info@eandp.events" className="text-gold hover:underline">info@eandp.events</a>
             </p>
-            <p className="text-gray-300">
-              Atlanta, GA
+   <p className="text-gray-300 mb-2">
+              Phone: <a href="tel:17704108302" className="text-gold hover:underline">(770) 410-8302</a>
             </p>
           </div>
         </div>

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /5q
 
-Sitemap: https://www.eandp.events/sitemap.xml
+Sitemap: https://eandp.events/sitemap.xml

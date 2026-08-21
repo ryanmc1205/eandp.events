@@ -1,83 +1,134 @@
 import React from "react";
-import { Presentation, Sparkles } from "lucide-react";
+import { Presentation, Gem } from "lucide-react";
 
 const WhatWeDoSection = () => {
   return (
     <section
       id="what-we-do"
-      className="relative z-10 section-container bg-transparent py-20"
+      className="relative z-10 section-container bg-charcoal text-white py-20"
     >
       <div className="max-w-4xl mx-auto text-center px-4">
-<h2 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 section-title">
-          Expert Planning for Unforgettable Events—Corporate & Cultural
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white section-title">
+          What Are You Planning?
         </h2>
-        <p className="text-lg mt-6 text-gray-700 hidden md:block">
-          Your event is more than a date on a calendar — it’s a milestone, a message, a moment that needs to move with clarity and care. We don’t just “help” — we lead. Before the chaos starts. With structure, calm, and cultural intelligence.
-        </p>
-        <p className="text-base mt-4 text-gray-700 block md:hidden">
-          From executive launches to cultural weddings — we lead high-stakes events with strategy, calm, and cultural insight.
+
+        <p className="text-lg mt-6 text-white/90 max-w-3xl mx-auto">
+          Every event is different. The way we lead isn't. Choose the path that's
+          right for you.
         </p>
       </div>
 
       {/* Desktop Split Layout */}
       <div className="mt-12 hidden md:grid grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
-        {/* Corporate */}
-        <a href="/corporate" className="group block bg-white/80 p-10 rounded-lg shadow-md hover:border-gold hover:shadow-xl transition-all hover:scale-[1.02]">
+
+        {/* Weddings */}
+        <a
+          href="/weddings"
+          className="group block bg-white p-10 rounded-lg shadow-md border border-transparent hover:border-gold hover:bg-[#fcfaf5] hover:shadow-lg transition-all duration-300"
+        >
           <div className="flex items-start gap-4">
-            <div className="h-10 w-10 bg-[#e6e6ea] rounded-full flex items-center justify-center group-hover:scale-110">
-              <Presentation className="h-6 w-6 text-[#1a1a26]" />
+            <div className="h-10 w-10 bg-[#fdf6e3] rounded-full flex items-center justify-center transition-colors duration-300">
+              <Gem className="h-6 w-6 text-gold" />
             </div>
+
             <div>
-              <h3 className="text-2xl font-bold mb-2 text-[#2a2a2a] group-hover:text-gold">
-                Let’s Lead Your Corporate Event
+              <h3 className="text-2xl font-bold mb-2 text-[#2a2a2a] transition-colors duration-300 group-hover:text-gold">
+                Let&apos;s Plan Your Wedding
               </h3>
-              <p className="text-gray-700 mb-3">
-            You need results, not risk. From brand launches and seasonal celebrations to executive summits, our corporate event planning delivers measurable impact - with clarity, confidence, and cultural fluency from our Atlanta-based team, trusted worldwide.
+
+              <p className="text-gray-700 mb-4">
+                South Asian and fusion weddings are beautifully layered with
+                tradition, culture, and family. Each celebration carries the
+                weight of multiple ceremonies, generations, and expectations that
+                deserve to be honored well. From baraats and sangeets to elegant
+                receptions, we lead with calm, cultural understanding, and
+                thoughtful planning so you can be fully present for every moment.
               </p>
-              <p className="text-sm text-gold font-semibold underline group-hover:no-underline">
-                Click Here to view Corporate Services →
+
+              <p className="text-sm font-semibold text-gold underline group-hover:no-underline">
+                Explore Wedding Planning →
               </p>
             </div>
           </div>
         </a>
 
-        {/* Weddings */}
-        <a href="/weddings" className="group block bg-white/80 p-10 rounded-lg shadow-md hover:border-gold hover:shadow-xl transition-all hover:scale-[1.02]">
+        {/* Corporate */}
+        <a
+          href="/corporate"
+          className="group block bg-white p-10 rounded-lg shadow-md border border-transparent hover:border-gold hover:bg-[#fcfaf5] hover:shadow-lg transition-all duration-300"
+        >
           <div className="flex items-start gap-4">
-            <div className="h-10 w-10 bg-[#fdf6e3] rounded-full flex items-center justify-center group-hover:scale-110">
-              <Sparkles className="h-6 w-6 text-gold" />
+            <div className="h-10 w-10 bg-[#e6e6ea] rounded-full flex items-center justify-center transition-colors duration-300">
+              <Presentation className="h-6 w-6 text-[#1a1a26]" />
             </div>
+
             <div>
-              <h3 className="text-2xl font-bold mb-2 text-[#2a2a2a] group-hover:text-gold">
-                Let’s Plan Your Wedding
+              <h3 className="text-2xl font-bold mb-2 text-[#2a2a2a] transition-colors duration-300 group-hover:text-gold">
+                Let&apos;s Lead Your Corporate Event
               </h3>
-              <p className="text-gray-700 mb-3">
-               As an experienced Indian wedding planner in Atlanta, we specialize in South Asian and fusion weddings layered with culture, complexity, and tradition. From baraats and sangeets to elegant receptions, our team brings lived experience, calm execution, and cultural fluency to every celebration.
+
+              <p className="text-gray-700 mb-4">
+                Corporate events carry the weight of your brand, your people,
+                and your reputation. Every detail reflects something bigger than
+                the event itself. From executive summits and product launches to
+                team celebrations and client events, we lead the planning and
+                manage the execution so you can stay focused on what matters
+                most.
               </p>
-              <p className="text-sm text-gold font-semibold underline group-hover:no-underline">
-                Click Here to explore Wedding Planning →
+
+              <p className="text-sm font-semibold text-gold underline group-hover:no-underline">
+                Explore Corporate Planning →
               </p>
             </div>
           </div>
         </a>
       </div>
 
-      {/* Mobile Vertical Stack */}
+      {/* Mobile Stack */}
       <div className="mt-12 md:hidden flex flex-col gap-6 max-w-xl mx-auto px-4">
-        {/* Corporate (placed first if preferred) */}
-        <a href="/corporate" className="block bg-white p-6 rounded-lg shadow hover:shadow-lg border border-gray-100 hover:border-gold transition-all">
-  <Presentation className="h-6 w-6 text-[#1a1a26]" />
-          <h3 className="text-xl font-bold text-[#2a2a2a] mb-2"> Let’s Lead Your Corporate Event</h3>
-          <p className="text-sm text-gray-700 mb-2">Brand launches, summits, and culture-driven corporate experiences.</p>
-          <p className="text-sm text-gold font-semibold underline">See Corporate Services →</p>
-        </a>
 
         {/* Weddings */}
-        <a href="/weddings" className="block bg-white p-6 rounded-lg shadow hover:shadow-lg border border-gray-100 hover:border-gold transition-all">
-    <Sparkles className="h-6 w-6 text-gold" />
-          <h3 className="text-xl font-bold text-[#2a2a2a] mb-2">Let’s Plan Your Wedding</h3>
-          <p className="text-sm text-gray-700 mb-2">Experience, elegance, and cultural fluency for once-in-a-lifetime days.</p>
-          <p className="text-sm text-gold font-semibold underline">See Wedding Services →</p>
+        <a
+          href="/weddings"
+          className="block bg-white p-6 rounded-lg shadow border border-gray-100 hover:border-gold hover:bg-[#fcfaf5] hover:shadow-lg transition-all duration-300"
+        >
+          <Gem className="h-6 w-6 text-gold mb-3" />
+
+          <h3 className="text-xl font-bold text-[#2a2a2a] mb-2">
+            Let&apos;s Plan Your Wedding
+          </h3>
+
+          <p className="text-sm text-gray-700 mb-3">
+            South Asian and fusion weddings are beautifully layered with
+            tradition, culture, and family. We lead with calm, cultural
+            understanding, and thoughtful planning so you can be fully present.
+          </p>
+
+          <p className="text-sm font-semibold text-gold underline">
+            Explore Wedding Planning →
+          </p>
+        </a>
+
+        {/* Corporate */}
+        <a
+          href="/corporate"
+          className="block bg-white p-6 rounded-lg shadow border border-gray-100 hover:border-gold hover:bg-[#fcfaf5] hover:shadow-lg transition-all duration-300"
+        >
+          <Presentation className="h-6 w-6 text-[#1a1a26] mb-3" />
+
+          <h3 className="text-xl font-bold text-[#2a2a2a] mb-2">
+            Let&apos;s Lead Your Corporate Event
+          </h3>
+
+          <p className="text-sm text-gray-700 mb-3">
+            Corporate events carry the weight of your brand, your people, and
+            your reputation. We lead the planning and execution so you can stay
+            focused on what matters most.
+          </p>
+
+          <p className="text-sm font-semibold text-gold underline">
+            Explore Corporate Planning →
+          </p>
         </a>
       </div>
     </section>

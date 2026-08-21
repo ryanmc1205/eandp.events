@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "generate-sitemap": "node generate-sitemap.js",
-    "build": "npm run generate-sitemap && vite build"
+ "build": "npm run generate-sitemap && NODE_ENV=production vite build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

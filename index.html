@@ -1,58 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="E&P Events" />
+  <link rel="icon" href="/lovable-uploads/77d9a347-7e81-4f55-827e-07598bec637f.png" type="image/png" />
+  <link rel="preload" as="image" href="/lovable-uploads/SSTK_asset_small_new.webp" type="image/webp" />
+
+  <!-- Cal element-click embed (global loader) -->
+  <script type="text/javascript">
+    (function (C, A, L) {
+      let p = function (api, args) { api.q.push(args); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal, args = arguments;
+        if (!cal.loaded) {
+          cal.ns = {}; cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (args[0] === L) {
+          const api = function () { p(api, arguments); };
+          const ns = args[1];
+          api.q = api.q || [];
+          if (typeof ns === "string") {
+            cal.ns[ns] = cal.ns[ns] || api;
+            p(cal.ns[ns], args);
+            p(cal, ["initNamespace", ns]);
+          } else {
+            p(cal, args);
+          }
+          return;
+        }
+        p(cal, args);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    // Simple, no-namespace global init (Option B)
+    Cal("init", { origin: "https://app.cal.com" });
+    Cal("ui", { layout: "month_view" });
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+  <script type="module" src="/src/main.tsx"></script>
+
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QMY9ZR38N1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
-   gtag('config', 'G-QMY9ZR38N1', {
-  debug_mode: true
-});
-
+    gtag('config', 'G-QMY9ZR38N1');
   </script>
 
-  <!-- Hotjar Tracking Code for Site 6428241 -->
+  <!-- Hotjar Tracking Code (async) -->
   <script>
     (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:6428241,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:6428241,hjsv:6};
+      a=o.getElementsByTagName('body')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
   </script>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>Indian Wedding & Corporate Event Planner in Atlanta | E&P Events</title>
-  <meta name="description" content="E&P Events is Atlanta’s premier planner for Indian, South Asian, and fusion weddings — and luxury corporate events. Elevate your celebration with us." />
-<link rel="canonical" href="https://eandp.events/" />  
-<meta name="author" content="E&P Events" />
-
-  <meta property="og:title" content="Atlanta Luxury Wedding & Corporate Event Planner | South Asian & Fusion Experts | E&P Events" />
-  <meta property="og:description" content="E&P Events is Atlanta’s premier planner for luxury weddings—including South Asian and fusion—and high-end corporate events. Elevate your celebration with us." />
-  <meta property="og:type" content="website" />
-
-
-   <link rel="icon" href="/lovable-uploads/77d9a347-7e81-4f55-827e-07598bec637f.png" type="image/png">
-  <link
-    rel="preload"
-    as="image"
-    href="/lovable-uploads/0d69fd76-5bed-40b1-8935-d005fb4b5c77.png"
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-
-<body>
-  <div id="root"></div>
-  <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
