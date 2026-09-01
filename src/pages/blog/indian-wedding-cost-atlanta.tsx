@@ -14,8 +14,8 @@ const IndianWeddingCostAtlanta = () => {
   const description =
     "Get a transparent breakdown of Indian wedding costs in Atlanta for 2026. Learn what a multi-event celebration really costs, how to save, and where to spend.";
   const heroSrc = "/lovable-uploads/atlanta-wedding-budget-guide.webp";
-  const ogImage =
-    "https://eandp.events/lovable-uploads/atlanta-indian-wedding-budget-guide.webp";
+    const ogImage =
+  "https://eandp.events/lovable-uploads/atlanta-wedding-budget-guide.webp";
   const clarityUrl = "https://cal.com/eandp.events/15min";
 
   const breadcrumbLd = {
