@@ -35,7 +35,7 @@ const Index = () => {
         <link
           rel="preload"
           as="image"
-          href="/lovable-uploads/homepage-hero.webp"
+          href="/lovable-uploads/SSTK_asset_small_new.webp"
           type="image/webp"
         />
 
