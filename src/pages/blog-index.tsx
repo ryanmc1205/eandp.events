@@ -9,6 +9,7 @@ type BlogMetaItem = {
   title: string;
   datePublished: string;
   lastmod: string;
+  articleSection: string;
   image?: string;
   excerpt?: string;
 };
@@ -30,6 +31,7 @@ const Blog = () => {
     excerpt: p.excerpt ?? "",
     datePublished: p.datePublished,
     lastmod: p.lastmod,
+     articleSection: p.articleSection,
   }));
 
   const blogLd = {
@@ -49,7 +51,7 @@ const Blog = () => {
       datePublished: p.datePublished,
       dateModified: p.lastmod,
       mainEntityOfPage: toAbs(p.href),
-      articleSection: "Corporate Events",
+      articleSection: p.articleSection,
     })),
   };
 
