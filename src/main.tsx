@@ -1,18 +1,22 @@
-// src/main.tsx
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { HelmetProvider } from 'react-helmet-async';
-import App from './App';
-import './index.css';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
-const rootEl = document.getElementById('root');
+import App from "./App";
+import "./index.css";
+
+const rootEl = document.getElementById("root");
 
 if (rootEl) {
   const root = createRoot(rootEl);
+
   root.render(
     <React.StrictMode>
       <HelmetProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </HelmetProvider>
     </React.StrictMode>
   );
