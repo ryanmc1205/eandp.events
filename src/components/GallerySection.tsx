@@ -14,9 +14,11 @@ const GallerySection = () => {
   return (
     <section id="gallery" className="section-container bg-charcoal text-white py-20">
       <div className="max-w-6xl mx-auto">
-        <h2 className="section-title text-white text-center">Now, See for Yourself.</h2>
-      <p className="text-lg mb-12 text-center">
-       <div className="text-center text-white space-y-4 text-lg md:text-xl">
+        <h2 className="section-title text-white text-center">
+  Now, See for Yourself.
+</h2>
+
+<div className="text-center text-white space-y-4 text-lg md:text-xl mb-12">
   <p>Real moments. Real memories.</p>
 </div>
 
