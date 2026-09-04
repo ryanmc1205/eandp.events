@@ -1,5 +1,5 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
@@ -8,16 +8,20 @@ import "./index.css";
 
 const rootEl = document.getElementById("root");
 
-if (rootEl) {
-  const root = createRoot(rootEl);
+const app = (
+  <React.StrictMode>
+    <HelmetProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </HelmetProvider>
+  </React.StrictMode>
+);
 
-  root.render(
-    <React.StrictMode>
-      <HelmetProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </HelmetProvider>
-    </React.StrictMode>
-  );
+if (rootEl) {
+  if (rootEl.hasChildNodes()) {
+    hydrateRoot(rootEl, app);
+  } else {
+    createRoot(rootEl).render(app);
+  }
 }
