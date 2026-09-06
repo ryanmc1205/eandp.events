@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-export default defineConfig(({ isSsrBuild }) => ({
+export default defineConfig({
   server: {
     host: "::",
     port: 8080,
@@ -15,16 +15,4 @@ export default defineConfig(({ isSsrBuild }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-
-  build: {
-    rollupOptions: {
-      output: isSsrBuild
-        ? {}
-        : {
-            manualChunks: {
-              vendor: ["react", "react-dom"],
-            },
-          },
-    },
-  },
-}));
+});
