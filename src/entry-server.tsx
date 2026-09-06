@@ -11,11 +11,15 @@ type RenderResult = {
   headHtml: string;
 };
 
-function renderReactToHtml(element: React.ReactElement): Promise<string> {
+function renderReactToHtml(
+  element: React.ReactElement
+): Promise<string> {
   return new Promise((resolve, reject) => {
     const output = new PassThrough();
+
     let html = "";
     let settled = false;
+    let renderError: unknown = null;
 
     output.setEncoding("utf8");
 
@@ -24,17 +28,23 @@ function renderReactToHtml(element: React.ReactElement): Promise<string> {
     });
 
     output.on("end", () => {
-      if (!settled) {
-        settled = true;
-        resolve(html);
+      if (settled) return;
+
+      settled = true;
+
+      if (renderError) {
+        reject(renderError);
+        return;
       }
+
+      resolve(html);
     });
 
     output.on("error", (error) => {
-      if (!settled) {
-        settled = true;
-        reject(error);
-      }
+      if (settled) return;
+
+      settled = true;
+      reject(error);
     });
 
     const stream = renderToPipeableStream(element, {
@@ -43,28 +53,34 @@ function renderReactToHtml(element: React.ReactElement): Promise<string> {
       },
 
       onShellError(error) {
-        if (!settled) {
-          settled = true;
-          reject(error);
-        }
+        if (settled) return;
+
+        settled = true;
+        reject(error);
       },
 
       onError(error) {
+        renderError = error;
         console.error("[prerender] React render error:", error);
       },
     });
 
     setTimeout(() => {
-      if (!settled) {
-        stream.abort();
-        settled = true;
-        reject(new Error("Static rendering timed out after 30 seconds."));
-      }
+      if (settled) return;
+
+      stream.abort();
+      settled = true;
+
+      reject(
+        new Error("Static rendering timed out after 30 seconds.")
+      );
     }, 30_000);
   });
 }
 
-export async function render(url: string): Promise<RenderResult> {
+export async function render(
+  url: string
+): Promise<RenderResult> {
   const helmetContext: Record<string, any> = {};
 
   const appHtml = await renderReactToHtml(
