@@ -1,31 +1,99 @@
-import React from 'react'
-import { renderToString } from 'react-dom/server'
-import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server'
-import { PageShell } from './PageShell'
+import React from "react";
+import { PassThrough } from "node:stream";
+import { renderToPipeableStream } from "react-dom/server";
+import { StaticRouter } from "react-router-dom/server";
+import { HelmetProvider } from "react-helmet-async";
 
-export { render }
-export { passToClient }
+import App from "./App";
 
-const passToClient = ['pageProps']
+type RenderResult = {
+  appHtml: string;
+  headHtml: string;
+};
 
-async function render(pageContext) {
-  const { Page } = pageContext
+function renderReactToHtml(element: React.ReactElement): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const output = new PassThrough();
+    let html = "";
+    let settled = false;
 
-  const pageHtml = renderToString(
-    <PageShell pageContext={pageContext}>
-      <Page />
-    </PageShell>
-  )
+    output.setEncoding("utf8");
 
-  return escapeInject`<!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>E&P Events</title>
-      </head>
-      <body>
-        <div id="root">${dangerouslySkipEscape(pageHtml)}</div>
-      </body>
-    </html>`
+    output.on("data", (chunk) => {
+      html += chunk;
+    });
+
+    output.on("end", () => {
+      if (!settled) {
+        settled = true;
+        resolve(html);
+      }
+    });
+
+    output.on("error", (error) => {
+      if (!settled) {
+        settled = true;
+        reject(error);
+      }
+    });
+
+    const stream = renderToPipeableStream(element, {
+      onAllReady() {
+        stream.pipe(output);
+      },
+
+      onShellError(error) {
+        if (!settled) {
+          settled = true;
+          reject(error);
+        }
+      },
+
+      onError(error) {
+        console.error("[prerender] React render error:", error);
+      },
+    });
+
+    setTimeout(() => {
+      if (!settled) {
+        stream.abort();
+        settled = true;
+        reject(new Error("Static rendering timed out after 30 seconds."));
+      }
+    }, 30_000);
+  });
+}
+
+export async function render(url: string): Promise<RenderResult> {
+  const helmetContext: Record<string, any> = {};
+
+  const appHtml = await renderReactToHtml(
+    <HelmetProvider context={helmetContext}>
+      <StaticRouter location={url}>
+        <App />
+      </StaticRouter>
+    </HelmetProvider>
+  );
+
+  const helmet = helmetContext.helmet;
+
+  const headHtml = helmet
+    ? [
+        helmet.title?.toString(),
+        helmet.priority?.toString(),
+        helmet.meta?.toString(),
+        helmet.link?.toString(),
+        helmet.base?.toString(),
+        helmet.style?.toString(),
+        helmet.script?.toString(),
+        helmet.noscript?.toString(),
+      ]
+        .filter(Boolean)
+        .join("\n")
+    : "";
+
+  return {
+    appHtml,
+    headHtml,
+  };
 }
