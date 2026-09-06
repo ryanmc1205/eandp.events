@@ -4,12 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "preview": "vite preview",
-    "build:dev": "vite build --mode development",
-    "lint": "eslint .",
-    "generate-sitemap": "node generate-sitemap.js",
- "build": "npm run generate-sitemap && NODE_ENV=production vite build"
+  "dev": "vite",
+  "preview": "vite preview",
+  "build:dev": "vite build --mode development",
+  "lint": "eslint .",
+  "generate-sitemap": "node generate-sitemap.js",
+  "build:client": "vite build",
+  "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr",
+  "prerender": "node scripts/prerender.mjs",
+  "build": "npm run generate-sitemap && npm run build:client && npm run build:ssr && npm run prerender"
+}
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
