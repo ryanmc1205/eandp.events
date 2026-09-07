@@ -2,27 +2,33 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
+import { staticRoutes } from "./site-routes.mjs";
+
 const rootDir = process.cwd();
 const distDir = path.join(rootDir, "dist");
-const ssrEntryPath = path.join(rootDir, "dist-ssr", "entry-server.js");
-const blogJsonPath = path.join(rootDir, "src", "data", "blog.json");
+const ssrEntryPath = path.join(
+  rootDir,
+  "dist-ssr",
+  "entry-server.js"
+);
+const blogJsonPath = path.join(
+  rootDir,
+  "src",
+  "data",
+  "blog.json"
+);
 
 async function getRoutes() {
-  const staticRoutes = [
-    "/",
-    "/weddings",
-    "/corporate",
-    "/about",
-    "/blog",
-    "/5-questions",
-    "/privacy-policy",
-    "/unsubscribe",
-  ];
+  const rawBlogJson = await fs.readFile(
+    blogJsonPath,
+    "utf8"
+  );
 
-  const rawBlogJson = await fs.readFile(blogJsonPath, "utf8");
   const blogPosts = JSON.parse(rawBlogJson);
 
-  const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
+  const blogRoutes = blogPosts.map(
+    (post) => `/blog/${post.slug}`
+  );
 
   return [...new Set([...staticRoutes, ...blogRoutes])];
 }
@@ -32,13 +38,25 @@ function getOutputPath(route) {
     return path.join(distDir, "index.html");
   }
 
-  const cleanRoute = route.replace(/^\/+|\/+$/g, "");
+  const cleanRoute = route.replace(
+    /^\/+|\/+$/g,
+    ""
+  );
 
-  return path.join(distDir, cleanRoute, "index.html");
+  return path.join(
+    distDir,
+    cleanRoute,
+    "index.html"
+  );
 }
 
-function buildPage(template, appHtml, headHtml) {
-  const rootPlaceholder = '<div id="root"></div>';
+function buildPage(
+  template,
+  appHtml,
+  headHtml
+) {
+  const rootPlaceholder =
+    '<div id="root"></div>';
 
   if (!template.includes(rootPlaceholder)) {
     throw new Error(
@@ -62,17 +80,27 @@ function buildPage(template, appHtml, headHtml) {
 }
 
 async function main() {
-  console.log("[prerender] Starting static generation...");
+  console.log(
+    "[prerender] Starting static generation..."
+  );
 
-  const templatePath = path.join(distDir, "index.html");
+  const templatePath = path.join(
+    distDir,
+    "index.html"
+  );
 
-  const template = await fs.readFile(templatePath, "utf8");
+  const template = await fs.readFile(
+    templatePath,
+    "utf8"
+  );
 
   const serverModule = await import(
     `${pathToFileURL(ssrEntryPath).href}?t=${Date.now()}`
   );
 
-  if (typeof serverModule.render !== "function") {
+  if (
+    typeof serverModule.render !== "function"
+  ) {
     throw new Error(
       "SSR entry does not export a render(url) function."
     );
@@ -80,21 +108,39 @@ async function main() {
 
   const routes = await getRoutes();
 
-  console.log(`[prerender] Rendering ${routes.length} routes...`);
+  console.log(
+    `[prerender] Rendering ${routes.length} routes...`
+  );
 
   for (const route of routes) {
-    const { appHtml, headHtml } = await serverModule.render(route);
+    const { appHtml, headHtml } =
+      await serverModule.render(route);
 
-    const page = buildPage(template, appHtml, headHtml);
-    const outputPath = getOutputPath(route);
+    const page = buildPage(
+      template,
+      appHtml,
+      headHtml
+    );
 
-    await fs.mkdir(path.dirname(outputPath), {
-      recursive: true,
-    });
+    const outputPath =
+      getOutputPath(route);
 
-    await fs.writeFile(outputPath, page, "utf8");
+    await fs.mkdir(
+      path.dirname(outputPath),
+      {
+        recursive: true,
+      }
+    );
 
-    console.log(`[prerender] ✓ ${route}`);
+    await fs.writeFile(
+      outputPath,
+      page,
+      "utf8"
+    );
+
+    console.log(
+      `[prerender] ✓ ${route}`
+    );
   }
 
   console.log(
@@ -103,7 +149,11 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error("[prerender] Failed:");
+  console.error(
+    "[prerender] Failed:"
+  );
+
   console.error(error);
+
   process.exit(1);
 });
