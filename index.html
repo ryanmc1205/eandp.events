@@ -4,41 +4,106 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="E&P Events" />
-  <link rel="icon" href="/lovable-uploads/77d9a347-7e81-4f55-827e-07598bec637f.png" type="image/png" />
-  <link rel="preload" as="image" href="/lovable-uploads/SSTK_asset_small_new.webp" type="image/webp" />
 
-  <!-- Cal element-click embed (global loader) -->
+  <link
+    rel="icon"
+    href="/lovable-uploads/77d9a347-7e81-4f55-827e-07598bec637f.png"
+    type="image/png"
+  />
+
+  <link
+    rel="preload"
+    as="image"
+    href="/lovable-uploads/SSTK_asset_small_new.webp"
+    type="image/webp"
+  />
+
+  <!-- Cal element-click embed (global booking popup loader) -->
   <script type="text/javascript">
     (function (C, A, L) {
-      let p = function (api, args) { api.q.push(args); };
-      let d = C.document;
-      C.Cal = C.Cal || function () {
-        let cal = C.Cal, args = arguments;
-        if (!cal.loaded) {
-          cal.ns = {}; cal.q = cal.q || [];
-          d.head.appendChild(d.createElement("script")).src = A;
-          cal.loaded = true;
-        }
-        if (args[0] === L) {
-          const api = function () { p(api, arguments); };
-          const ns = args[1];
-          api.q = api.q || [];
-          if (typeof ns === "string") {
-            cal.ns[ns] = cal.ns[ns] || api;
-            p(cal.ns[ns], args);
-            p(cal, ["initNamespace", ns]);
-          } else {
-            p(cal, args);
-          }
-          return;
-        }
-        p(cal, args);
+      let p = function (a, ar) {
+        a.q.push(ar);
       };
-    })(window, "https://app.cal.com/embed/embed.js", "init");
 
-    // Simple, no-namespace global init (Option B)
-    Cal("init", { origin: "https://app.cal.com" });
-    Cal("ui", { layout: "month_view" });
+      let d = C.document;
+
+      C.Cal =
+        C.Cal ||
+        function () {
+          let cal = C.Cal;
+          let ar = arguments;
+
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+
+            d.head.appendChild(
+              d.createElement("script")
+            ).src = A;
+
+            cal.loaded = true;
+          }
+
+          if (ar[0] === L) {
+            const api = function () {
+              p(api, arguments);
+            };
+
+            const namespace = ar[1];
+
+            api.q = api.q || [];
+
+            if (typeof namespace === "string") {
+              cal.ns[namespace] =
+                cal.ns[namespace] || api;
+
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else {
+              p(cal, ar);
+            }
+
+            return;
+          }
+
+          p(cal, ar);
+        };
+    })(
+      window,
+      "https://app.cal.com/embed/embed.js",
+      "init"
+    );
+
+    /*
+     * General / wedding booking calendar
+     */
+    Cal("init", "30min", {
+      origin: "https://app.cal.com"
+    });
+
+    Cal.ns["30min"]("ui", {
+      hideEventTypeDetails: false,
+      layout: "month_view"
+    });
+
+    /*
+     * Corporate booking calendar
+     */
+    Cal("init", "corporate-b2b-15", {
+      origin: "https://app.cal.com"
+    });
+
+    Cal.ns["corporate-b2b-15"]("ui", {
+      hideEventTypeDetails: false,
+      layout: "month_view"
+    });
+
+    /*
+     * Forward UTM and other query parameters
+     * into the Cal booking flow.
+     */
+    Cal.config = Cal.config || {};
+    Cal.config.forwardQueryParams = true;
   </script>
 </head>
 
@@ -49,24 +114,52 @@
   <script type="module" src="/src/main.tsx"></script>
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QMY9ZR38N1"></script>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-QMY9ZR38N1"
+  ></script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QMY9ZR38N1');
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+    gtag("config", "G-QMY9ZR38N1");
   </script>
 
   <!-- Hotjar Tracking Code (async) -->
   <script>
-    (function(h,o,t,j,a,r){
-      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-      h._hjSettings={hjid:6428241,hjsv:6};
-      a=o.getElementsByTagName('body')[0];
-      r=o.createElement('script');r.async=1;
-      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+    (function (h, o, t, j, a, r) {
+      h.hj =
+        h.hj ||
+        function () {
+          (h.hj.q = h.hj.q || []).push(arguments);
+        };
+
+      h._hjSettings = {
+        hjid: 6428241,
+        hjsv: 6
+      };
+
+      a = o.getElementsByTagName("body")[0];
+      r = o.createElement("script");
+      r.async = 1;
+      r.src =
+        t +
+        h._hjSettings.hjid +
+        j +
+        h._hjSettings.hjsv;
+
       a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    })(
+      window,
+      document,
+      "https://static.hotjar.com/c/hotjar-",
+      ".js?sv="
+    );
   </script>
 </body>
 </html>
