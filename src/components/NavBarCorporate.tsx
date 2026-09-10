@@ -2,31 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 
-declare global {
-  interface Window {
-    Cal?: (...args: any[]) => void;
-    __calReady?: boolean;
-  }
-}
-
-const CORPORATE_CAL_LINK = "eandp.events/corporate-b2b-15";
+const CORPORATE_CAL_URL =
+  "https://cal.com/eandp.events/corporate-b2b-15";
 
 const NavBarCorporate: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [calLinkWithUtm, setCalLinkWithUtm] = useState(
-    CORPORATE_CAL_LINK
-  );
-
-  // Add current UTM/query parameters only after hydration.
-  // This keeps the server-rendered HTML and the browser's first render identical.
-  useEffect(() => {
-    const qs = window.location.search.replace(/^\?/, "");
-
-    if (qs) {
-      setCalLinkWithUtm(`${CORPORATE_CAL_LINK}?${qs}`);
-    }
-  }, []);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
@@ -35,17 +16,6 @@ const NavBarCorporate: React.FC = () => {
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const handleOpen = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-
-    // Prefer Cal overlay; fall back to direct URL if runtime is not ready.
-    if (typeof window.Cal === "function" && window.__calReady) {
-      window.Cal("open", { calLink: calLinkWithUtm });
-    } else {
-      window.location.href = `https://cal.com/${calLinkWithUtm}`;
-    }
-  };
 
   return (
     <nav
@@ -68,6 +38,7 @@ const NavBarCorporate: React.FC = () => {
           className="md:hidden p-2"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -105,28 +76,28 @@ const NavBarCorporate: React.FC = () => {
 
           <a
             href="#what-we-do"
-            className="text-black hover:text-gold"
+            className="text-black hover:text-gold transition-colors"
           >
             What We Do
           </a>
 
           <a
             href="#testimonials"
-            className="text-black hover:text-gold"
+            className="text-black hover:text-gold transition-colors"
           >
             Testimonials
           </a>
 
           <a
             href="#partners"
-            className="text-black hover:text-gold"
+            className="text-black hover:text-gold transition-colors"
           >
             Partners
           </a>
 
           <a
             href="#cta"
-            className="text-black hover:text-gold"
+            className="text-black hover:text-gold transition-colors"
           >
             Contact
           </a>
@@ -140,13 +111,17 @@ const NavBarCorporate: React.FC = () => {
 
           {/* Events Dropdown */}
           <div className="relative group">
-            <button className="text-black hover:text-gold flex items-center transition-colors">
+            <button
+              type="button"
+              className="text-black hover:text-gold flex items-center transition-colors"
+            >
               Events
 
               <svg
                 className="ml-1 h-4 w-4"
                 viewBox="0 0 20 20"
                 fill="currentColor"
+                aria-hidden="true"
               >
                 <path
                   fillRule="evenodd"
@@ -173,10 +148,12 @@ const NavBarCorporate: React.FC = () => {
             </div>
           </div>
 
-          {/* Book a Call — Cal overlay trigger */}
+          {/* Book a Call — Cal popup trigger */}
           <a
-            href="#"
-            onClick={handleOpen}
+            href={CORPORATE_CAL_URL}
+            data-cal-link="eandp.events/corporate-b2b-15"
+            data-cal-namespace="corporate-b2b-15"
+            data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
             className="ml-6 inline-flex items-center rounded-md bg-gold px-5 py-2 text-sm font-semibold text-[#2a2a2a] shadow-md hover:bg-[#d4af37] hover:shadow-lg transition-all duration-200"
           >
             Book a Call
@@ -198,7 +175,7 @@ const NavBarCorporate: React.FC = () => {
 
             <a
               href="#what-we-do"
-              className="text-black hover:text-gold"
+              className="text-black hover:text-gold transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               What We Do
@@ -206,7 +183,7 @@ const NavBarCorporate: React.FC = () => {
 
             <a
               href="#testimonials"
-              className="text-black hover:text-gold"
+              className="text-black hover:text-gold transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Testimonials
@@ -214,7 +191,7 @@ const NavBarCorporate: React.FC = () => {
 
             <a
               href="#partners"
-              className="text-black hover:text-gold"
+              className="text-black hover:text-gold transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Partners
@@ -222,7 +199,7 @@ const NavBarCorporate: React.FC = () => {
 
             <a
               href="#cta"
-              className="text-black hover:text-gold"
+              className="text-black hover:text-gold transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
@@ -230,20 +207,20 @@ const NavBarCorporate: React.FC = () => {
 
             <a
               href="/blog"
-              className="text-black hover:text-gold"
+              className="text-black hover:text-gold transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Blog
             </a>
 
-            {/* Mobile Book a Call — overlay trigger */}
+            {/* Mobile Book a Call — Cal popup trigger */}
             <a
-              href="#"
-              onClick={(e) => {
-                handleOpen(e);
-                setIsMenuOpen(false);
-              }}
-              className="mt-2 inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 text-sm font-semibold text-[#2a2a2a] shadow-md hover:bg-[#d4af37]"
+              href={CORPORATE_CAL_URL}
+              data-cal-link="eandp.events/corporate-b2b-15"
+              data-cal-namespace="corporate-b2b-15"
+              data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-2 inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 text-sm font-semibold text-[#2a2a2a] shadow-md hover:bg-[#d4af37] transition-colors"
             >
               Book a Call
             </a>
