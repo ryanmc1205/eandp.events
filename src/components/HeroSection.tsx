@@ -12,7 +12,6 @@ const HeroSection = () => {
         alt="Indian wedding and corporate event planner in Atlanta"
         width={1920}
         height={1080}
-        fetchPriority="high"
         decoding="async"
         className="absolute inset-0 w-full h-full object-cover"
       />
@@ -34,7 +33,9 @@ const HeroSection = () => {
         </p>
 
         <p className="text-white text-lg mb-8 text-shadow">
-          Whether you're navigating family traditions or stakeholder expectations, we lead with calm, precision, and cultural fluency so you can simply be present.
+          Whether you're navigating family traditions or stakeholder expectations,
+          we lead with calm, precision, and cultural fluency so you can simply be
+          present.
         </p>
 
         <div className="flex justify-center">
@@ -54,7 +55,9 @@ const HeroSection = () => {
         </p>
 
         <p className="text-lg md:text-xl mb-10 text-white max-w-3xl mx-auto text-shadow">
-          Whether you're navigating family traditions or stakeholder expectations, we lead with calm, precision, and cultural fluency so you can simply be present.
+          Whether you're navigating family traditions or stakeholder expectations,
+          we lead with calm, precision, and cultural fluency so you can simply be
+          present.
         </p>
 
         <div className="flex justify-center">
@@ -76,6 +79,7 @@ const HeroSection = () => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
