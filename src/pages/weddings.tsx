@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Button } from "@/components/ui/button";
 import { Check, Globe, Users, Plane, Facebook, Instagram, Mail } from "lucide-react";
 import NavBarWeddings from "@/components/NavBarWeddings";
 import { weddingGalleryImages } from "@/data/weddinggallery";
@@ -84,11 +83,26 @@ const Weddings = () => {
   <meta property="og:description" content="Indian & South Asian wedding planner in Atlanta specializing in Hindu, Sikh, Pakistani, Bangladeshi, and fusion weddings. We bring calm to complex celebrations through cultural fluency, thoughtful planning, and confident leadership." />
   <meta property="og:image" content="https://eandp.events/og/weddings.jpg" />
 
-  {/* Twitter Card */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Indian & South Asian WeddingIndian & South Asian wedding planner in Atlanta specializing in Hindu, Sikh, Pakistani, Bangladeshi, and fusion weddings. We bring calm to complex celebrations through cultural fluency, thoughtful planning, and confident leadership. Planner in Atlanta | E&P Events" />
-  <meta name="twitter:description" content="" />
-  <meta name="twitter:image" content="https://eandp.events/og/weddings.jpg" />
+{/* Twitter Card */}
+<meta
+  name="twitter:card"
+  content="summary_large_image"
+/>
+
+<meta
+  name="twitter:title"
+  content="Indian & South Asian Wedding Planner in Atlanta | E&P Events"
+/>
+
+<meta
+  name="twitter:description"
+  content="Indian & South Asian wedding planner in Atlanta specializing in Hindu, Sikh, Pakistani, Bangladeshi, and fusion weddings. We bring calm to complex celebrations through cultural fluency, thoughtful planning, and confident leadership."
+/>
+
+<meta
+  name="twitter:image"
+  content="https://eandp.events/og/weddings.jpg"
+/>
 </Helmet>
 
 
@@ -184,6 +198,7 @@ const Weddings = () => {
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        aria-hidden="true"
       >
         <path
           strokeLinecap="round"
@@ -469,21 +484,22 @@ const Weddings = () => {
 
             <div className="glow-button-wrapper mx-auto">
               <div className="glow-ring" />
-              <a
-                href="https://cal.com/eandp.events/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glow-button-inner"
-                onClick={() => {
-                  (window as any).gtag?.('event', 'cta_click', {
-                    button_text: 'Book Your Free Clarity Call',
-                    cta_type: 'weddings_cta',
-                    page_path: window.location.pathname,
-                  });
-                }}
-              >
-                Book Your Free Clarity Call
-              </a>
+             <a
+  href="https://cal.com/eandp.events/30min"
+  data-cal-link="eandp.events/30min"
+  data-cal-namespace="30min"
+  data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+  className="glow-button-inner"
+  onClick={() => {
+    (window as any).gtag?.("event", "cta_click", {
+      button_text: "Book Your Free Clarity Call",
+      cta_type: "weddings_cta",
+      page_path: window.location.pathname,
+    });
+  }}
+>
+  Book Your Free Clarity Call
+</a>
             </div>
 
             <div className="mt-8">
