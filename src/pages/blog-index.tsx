@@ -3,17 +3,7 @@ import { Helmet } from "react-helmet-async";
 
 import NavBarBlog from "@/components/NavBarBlog";
 import Footer from "@/components/Footer";
-import blogMeta from "@/data/blog.json";
-
-type BlogMetaItem = {
-  slug: string;
-  title: string;
-  datePublished: string;
-  lastmod: string;
-  image?: string;
-  excerpt?: string;
-  category?: string;
-};
+import { getAllBlogMeta } from "@/lib/blogMeta";
 
 const ABSOLUTE_ORIGIN = "https://eandp.events";
 
@@ -31,19 +21,17 @@ const Blog = () => {
     "/lovable-uploads/IMG_0409.webp";
   const absHero = toAbs(heroImage);
 
-  const blogPosts = (
-    blogMeta as BlogMetaItem[]
-  ).map((post) => ({
-    title: post.title,
-    href: `/blog/${post.slug}`,
-    image:
-      post.image ??
-      "/lovable-uploads/fallback-blog.webp",
-    excerpt: post.excerpt ?? "",
-    datePublished: post.datePublished,
-    lastmod: post.lastmod,
-    category: post.category,
-  }));
+  const blogPosts = getAllBlogMeta().map(
+    (post) => ({
+      title: post.title,
+      href: `/blog/${post.slug}`,
+      image: post.image,
+      excerpt: post.excerpt,
+      datePublished: post.datePublished,
+      lastmod: post.lastmod,
+      category: post.category,
+    })
+  );
 
   const blogLd = {
     "@context": "https://schema.org",
@@ -64,13 +52,11 @@ const Blog = () => {
       image: toAbs(
         stripQuery(post.image)
       ),
-      description:
-        post.excerpt || undefined,
+      description: post.excerpt,
       datePublished: post.datePublished,
       dateModified: post.lastmod,
       mainEntityOfPage: toAbs(post.href),
-      articleSection:
-        post.category || undefined,
+      articleSection: post.category,
     })),
   };
 
@@ -285,11 +271,9 @@ const Blog = () => {
                     {post.title}
                   </h3>
 
-                  {post.excerpt ? (
-                    <p className="text-gray-700 mb-2 text-base">
-                      {post.excerpt}
-                    </p>
-                  ) : null}
+                  <p className="text-gray-700 mb-2 text-base">
+                    {post.excerpt}
+                  </p>
 
                   <span className="text-sm text-gold font-semibold underline group-hover:no-underline">
                     Read More →
