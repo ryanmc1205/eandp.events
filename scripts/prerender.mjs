@@ -143,8 +143,37 @@ async function main() {
     );
   }
 
+  /*
+   * Generate a real static 404 page.
+   *
+   * The URL intentionally does not match any application route,
+   * so React Router renders the wildcard NotFound component.
+   */
+  const {
+    appHtml: notFoundHtml,
+    headHtml: notFoundHeadHtml,
+  } = await serverModule.render(
+    "/__404_not_found__"
+  );
+
+  const notFoundPage = buildPage(
+    template,
+    notFoundHtml,
+    notFoundHeadHtml
+  );
+
+  await fs.writeFile(
+    path.join(distDir, "404.html"),
+    notFoundPage,
+    "utf8"
+  );
+
   console.log(
-    `[prerender] Finished. Generated ${routes.length} static pages.`
+    "[prerender] ✓ 404.html"
+  );
+
+  console.log(
+    `[prerender] Finished. Generated ${routes.length} static pages plus 404.html.`
   );
 }
 
