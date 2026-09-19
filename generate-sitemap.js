@@ -12,8 +12,6 @@ const __dirname = path.dirname(__filename);
 
 const BASE = "https://eandp.events";
 
-// Metadata for known static routes.
-// Any route not listed here will still be included with sensible defaults.
 const staticRouteMetadata = {
   "/": {
     changefreq: "monthly",
@@ -45,7 +43,6 @@ const staticRouteMetadata = {
   },
 };
 
-// 1) Static sitemap routes from shared route config
 const staticUrls = staticRoutes
   .filter(
     (route) => !sitemapExcludedRoutes.includes(route)
@@ -58,7 +55,6 @@ const staticUrls = staticRoutes
       staticRouteMetadata[loc]?.priority || "0.5",
   }));
 
-// 2) Dynamic blog routes from src/data/blog.json
 const blogJsonPath = path.resolve(
   __dirname,
   "src/data/blog.json"
@@ -89,7 +85,6 @@ const blogUrls = (blogPosts || []).map(
   })
 );
 
-// 3) Escape XML-safe values
 const escapeXml = (value) =>
   String(value)
     .replace(/&/g, "&amp;")
@@ -98,7 +93,6 @@ const escapeXml = (value) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&apos;");
 
-// 4) Build <url> entries
 const toUrlXml = ({
   loc,
   changefreq,
@@ -129,7 +123,6 @@ const toUrlXml = ({
   return lines.join("\n");
 };
 
-// 5) Merge + de-dupe
 const allUrls = [
   ...staticUrls,
   ...blogUrls,
@@ -141,7 +134,6 @@ const allUrls = [
     )
 );
 
-// 6) Write final XML
 const xml =
   `<?xml version="1.0" encoding="UTF-8"?>\n` +
   `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
