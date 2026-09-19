@@ -3,3 +3,4 @@ http://www.eandp.events/*      https://eandp.events/:splat     301!
 
 /clarity                       https://cal.com/eandp.events/clarity     301
 /5q                            /5-questions?utm_source=instagram&utm_medium=bio&utm_campaign=5q-redirect     302
+/ig                            /?utm_source=instagram&utm_medium=bio&utm_campaign=ig-redirect     302

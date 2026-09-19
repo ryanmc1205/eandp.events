@@ -10,7 +10,6 @@ import UnsubscribePage from "./pages/unsubscribe";
 import BlogIndex from "./pages/blog-index";
 import BlogArticleLayout from "./BlogArticleLayout";
 import FiveQuestionsPage from "./pages/5-questions";
-import IGRedirect from "./pages/IGRedirect";
 import { useAnalytics } from "@/hooks/use-analytics";
 
 const AnalyticsTracker = () => {
@@ -33,7 +32,6 @@ export const AppRoutes = () => {
         <Route path="/blog" element={<BlogIndex />} />
         <Route path="/blog/:slug" element={<BlogArticleLayout />} />
         <Route path="/5-questions" element={<FiveQuestionsPage />} />
-        <Route path="/ig" element={<IGRedirect />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
