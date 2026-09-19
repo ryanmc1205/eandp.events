@@ -1,7 +1,7 @@
 https://www.eandp.events/*     https://eandp.events/:splat     301!
-http://www.eandp.events/*     https://eandp.events/:splat     301!
-/clarity                      https://cal.com/eandp.events/clarity     301
-/5q                           /5-questions                               301
-/*.php                        404
-/*.cfm                        404
-/*                            /index.html                                200
+http://www.eandp.events/*      https://eandp.events/:splat     301!
+
+/clarity                       https://cal.com/eandp.events/clarity     301
+/5q                            /5-questions                              301
+
+/*                             /index.html                               200
