@@ -81,7 +81,7 @@ const Weddings = () => {
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Indian & South Asian Wedding Planner in Atlanta | E&P Events" />
   <meta property="og:description" content="Indian & South Asian wedding planner in Atlanta specializing in Hindu, Sikh, Pakistani, Bangladeshi, and fusion weddings. We bring calm to complex celebrations through cultural fluency, thoughtful planning, and confident leadership." />
-  <meta property="og:image" content="https://eandp.events/og/weddings.jpg" />
+  <meta property="og:image" content="https://eandp.events/lovable-uploads/89a4d798-f07a-42c8-bba9-15123f9d6ecb.webp" />
 
 {/* Twitter Card */}
 <meta
@@ -101,7 +101,7 @@ const Weddings = () => {
 
 <meta
   name="twitter:image"
-  content="https://eandp.events/og/weddings.jpg"
+  content="https://eandp.events/lovable-uploads/89a4d798-f07a-42c8-bba9-15123f9d6ecb.webp"
 />
 </Helmet>
 

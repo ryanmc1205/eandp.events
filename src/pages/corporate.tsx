@@ -108,7 +108,7 @@ const Corporate = () => {
 
         <meta
           property="og:image"
-          content="https://eandp.events/og/corporate.jpg"
+          content="https://eandp.events/lovable-uploads/corp3_cropped.webp"
         />
 
         <meta
@@ -128,7 +128,7 @@ const Corporate = () => {
 
         <meta
           name="twitter:image"
-          content="https://eandp.events/og/corporate.jpg"
+          content="https://eandp.events/lovable-uploads/corp3_cropped.webp"
         />
       </Helmet>
 

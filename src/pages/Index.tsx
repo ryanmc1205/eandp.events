@@ -68,7 +68,7 @@ const Index = () => {
 
         <meta
           property="og:image"
-          content="https://eandp.events/og/homepage.jpg"
+          content="https://eandp.events/lovable-uploads/SSTK_asset_small_new.webp"
         />
 
         <meta
@@ -88,7 +88,7 @@ const Index = () => {
 
         <meta
           name="twitter:image"
-          content="https://eandp.events/og/homepage.jpg"
+          content="https://eandp.events/lovable-uploads/SSTK_asset_small_new.webp"
         />
       </Helmet>
 
