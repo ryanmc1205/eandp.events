@@ -3,5 +3,3 @@ http://www.eandp.events/*      https://eandp.events/:splat     301!
 
 /clarity                       https://cal.com/eandp.events/clarity     301
 /5q                            /5-questions                              301
-
-/*                             /index.html                               200
