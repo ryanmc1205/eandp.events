@@ -18,7 +18,7 @@ export const weddingGalleryImages = [
     alt: "Close-up of intricate bridal mehndi and engagement ring during fusion wedding preparations in Atlanta",
   },
   {
-    src: "/lovable-uploads/SuparnaSaurabh8.webp",
+    src: "/lovable-uploads/suparnasaurabh8.webp",
     alt: "South Asian couple holding hands beneath a vibrant mandap during traditional Hindu wedding ceremony in Georgia",
   },
   {
