@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { openCalModal } from "@/lib/calModal";
 
 const CORPORATE_CAL_URL =
   "https://cal.com/eandp.events/corporate-b2b-15";
@@ -151,9 +152,11 @@ const NavBarCorporate: React.FC = () => {
           {/* Book a Call — Cal popup trigger */}
           <a
             href={CORPORATE_CAL_URL}
-            data-cal-link="eandp.events/corporate-b2b-15"
-            data-cal-namespace="corporate-b2b-15"
-            data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+            onClick={(event) => {
+              if (openCalModal("corporate-b2b-15")) {
+                event.preventDefault();
+              }
+            }}
             className="ml-6 inline-flex items-center rounded-md bg-gold px-5 py-2 text-sm font-semibold text-[#2a2a2a] shadow-md hover:bg-[#d4af37] hover:shadow-lg transition-all duration-200"
           >
             Book a Call
@@ -216,10 +219,13 @@ const NavBarCorporate: React.FC = () => {
             {/* Mobile Book a Call — Cal popup trigger */}
             <a
               href={CORPORATE_CAL_URL}
-              data-cal-link="eandp.events/corporate-b2b-15"
-              data-cal-namespace="corporate-b2b-15"
-              data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-              onClick={() => setIsMenuOpen(false)}
+              onClick={(event) => {
+                setIsMenuOpen(false);
+
+                if (openCalModal("corporate-b2b-15")) {
+                  event.preventDefault();
+                }
+              }}
               className="mt-2 inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 text-sm font-semibold text-[#2a2a2a] shadow-md hover:bg-[#d4af37] transition-colors"
             >
               Book a Call

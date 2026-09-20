@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { openCalModal } from "@/lib/calModal";
 
 type UnsubscribeStatus =
   | "processing"
@@ -179,11 +180,8 @@ const UnsubscribePage = () => {
               <div className="space-y-4">
                 <a
                   href="https://cal.com/eandp.events/30min"
-                  data-cal-link="eandp.events/30min"
-                  data-cal-namespace="30min"
-                  data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
                   className="inline-block bg-navy text-white px-8 py-3 rounded-full font-semibold hover:bg-gold transition-colors"
-                  onClick={() => {
+                  onClick={(event) => {
                     (window as any).gtag?.(
                       "event",
                       "cta_click",
@@ -197,6 +195,10 @@ const UnsubscribePage = () => {
                             .pathname,
                       }
                     );
+
+                    if (openCalModal("30min")) {
+                      event.preventDefault();
+                    }
                   }}
                 >
                   Schedule a Discovery Call

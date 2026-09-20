@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 
 import { getBlogMeta } from "@/lib/blogMeta";
+import { openCalModal } from "@/lib/calModal";
 
 const SLUG = "hidden-costs-diy-corporate-events";
 const ABSOLUTE_ORIGIN = "https://eandp.events";
@@ -575,10 +576,13 @@ const HiddenCostsOfDIYCorporateEvents: React.FC = () => {
 
             <a
               href={consultationUrl}
-              data-cal-link="eandp.events/corporate-b2b-15"
-              data-cal-namespace="corporate-b2b-15"
-              data-cal-config='{"layout":"month_view"}'
-              onClick={trackBookingClick}
+              onClick={(event) => {
+                trackBookingClick();
+
+                if (openCalModal("corporate-b2b-15")) {
+                  event.preventDefault();
+                }
+              }}
               className="inline-block px-6 py-3 rounded-lg bg-[#1f6feb] text-white font-semibold hover:opacity-90 transition"
             >
               Book a Corporate Consultation

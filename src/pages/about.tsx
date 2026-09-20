@@ -2,6 +2,7 @@ import React from "react";
 import NavBarBlog from "@/components/NavBarBlog";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet-async";
+import { openCalModal } from "@/lib/calModal";
 
 // Helpers
 const ABSOLUTE_ORIGIN = "https://eandp.events";
@@ -500,16 +501,17 @@ const About = () => {
 
               <a
                 href="https://cal.com/eandp.events/30min"
-                data-cal-link="eandp.events/30min"
-                data-cal-namespace="30min"
-                data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
                 className="glow-button-inner"
-                onClick={() => {
+                onClick={(event) => {
                   (window as any).gtag?.("event", "cta_click", {
                     button_text: "Book Your Free Clarity Call",
                     cta_type: "about_cta",
                     page_path: window.location.pathname,
                   });
+
+                  if (openCalModal("30min")) {
+                    event.preventDefault();
+                  }
                 }}
               >
                 Book Your Free Clarity Call

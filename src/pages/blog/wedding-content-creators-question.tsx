@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 
 import { getBlogMeta } from "@/lib/blogMeta";
+import { openCalModal } from "@/lib/calModal";
 
 const SLUG =
   "wedding-content-creators-question";
@@ -304,10 +305,13 @@ const WeddingContentCreatorArticle: React.FC =
             <div className="mb-8">
               <a
                 href={clarityUrl}
-                data-cal-link="eandp.events/30min"
-                data-cal-namespace="30min"
-                data-cal-config='{"layout":"month_view"}'
-                onClick={trackBookingClick}
+                onClick={(event) => {
+                  trackBookingClick();
+
+                  if (openCalModal("30min")) {
+                    event.preventDefault();
+                  }
+                }}
                 className="inline-block px-6 py-3 rounded-lg bg-[#1f6feb] text-white font-semibold hover:opacity-90 transition"
               >
                 Book a 30-Minute Strategy Call
@@ -914,10 +918,13 @@ const WeddingContentCreatorArticle: React.FC =
 
               <a
                 href={clarityUrl}
-                data-cal-link="eandp.events/30min"
-                data-cal-namespace="30min"
-                data-cal-config='{"layout":"month_view"}'
-                onClick={trackBookingClick}
+                onClick={(event) => {
+                  trackBookingClick();
+
+                  if (openCalModal("30min")) {
+                    event.preventDefault();
+                  }
+                }}
                 className="inline-block px-6 py-3 rounded-lg bg-[#1f6feb] text-white font-semibold hover:opacity-90 transition"
               >
                 Schedule Your 30-Minute Call

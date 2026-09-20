@@ -13,6 +13,7 @@ import {
 import NavBarCorporate from "@/components/NavBarCorporate";
 import TestimonialSection from "@/components/TestimonialSection";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import { openCalModal } from "@/lib/calModal";
 
 const corporateTestimonials = [
   {
@@ -464,16 +465,17 @@ const Corporate = () => {
 
               <a
                 href="https://cal.com/eandp.events/corporate-b2b-15"
-                data-cal-link="eandp.events/corporate-b2b-15"
-                data-cal-namespace="corporate-b2b-15"
-                data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
                 className="glow-button-inner"
-                onClick={() => {
+                onClick={(event) => {
                   (window as any).gtag?.("event", "cta_click", {
                     button_text: "Book Your Planning Consult",
                     cta_type: "corporate_cta",
                     page_path: window.location.pathname,
                   });
+
+                  if (openCalModal("corporate-b2b-15")) {
+                    event.preventDefault();
+                  }
                 }}
               >
                 Book Your Planning Consult

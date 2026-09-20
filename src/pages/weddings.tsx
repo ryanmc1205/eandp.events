@@ -7,6 +7,7 @@ import { weddingGalleryImages } from "@/data/weddinggallery";
 import TestimonialSection from "@/components/TestimonialSection";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import AccordionCard from "@/components/AccordionCard";
+import { openCalModal } from "@/lib/calModal";
 
 const weddingTestimonials = [
   {
@@ -486,16 +487,17 @@ const Weddings = () => {
               <div className="glow-ring" />
              <a
   href="https://cal.com/eandp.events/30min"
-  data-cal-link="eandp.events/30min"
-  data-cal-namespace="30min"
-  data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
   className="glow-button-inner"
-  onClick={() => {
+  onClick={(event) => {
     (window as any).gtag?.("event", "cta_click", {
       button_text: "Book Your Free Clarity Call",
       cta_type: "weddings_cta",
       page_path: window.location.pathname,
     });
+
+    if (openCalModal("30min")) {
+      event.preventDefault();
+    }
   }}
 >
   Book Your Free Clarity Call

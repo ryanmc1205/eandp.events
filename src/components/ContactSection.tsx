@@ -1,4 +1,5 @@
 import React from "react";
+import { openCalModal } from "@/lib/calModal";
 
 const ContactSection = () => {
   return (
@@ -25,15 +26,17 @@ const ContactSection = () => {
           <div className="glow-ring" />
           <a
             href="https://cal.com/eandp.events/clarity"
-            target="_blank"
-            rel="noopener noreferrer"
             className="glow-button-inner"
-            onClick={() => {
+            onClick={(event) => {
               window.gtag?.("event", "cta_click", {
                 button_text: "Book Your Free Clarity Call",
                 cta_type: "main_cta",
                 page_path: window.location.pathname,
               });
+
+              if (openCalModal("clarity")) {
+                event.preventDefault();
+              }
             }}
           >
             Book Your Free Clarity Call

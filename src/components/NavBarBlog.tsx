@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { openCalModal } from "@/lib/calModal";
 
 const NavBarBlog = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -63,9 +64,13 @@ const NavBarBlog = () => {
           {/* Header CTA */}
           <a
             href="https://cal.com/eandp.events/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={handleCtaClick}
+            onClick={(event) => {
+              handleCtaClick();
+
+              if (openCalModal("30min")) {
+                event.preventDefault();
+              }
+            }}
             className="ml-6 inline-flex items-center rounded-md bg-gold px-5 py-2 text-sm font-semibold text-[#2a2a2a] shadow-md hover:bg-[#d4af37] hover:shadow-lg transition-all duration-200"
           >
             Book a Call
@@ -85,11 +90,13 @@ const NavBarBlog = () => {
               {/* Mobile CTA */}
               <a
                 href="https://cal.com/eandp.events/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
+                onClick={(event) => {
                   handleCtaClick();
                   setIsMenuOpen(false);
+
+                  if (openCalModal("30min")) {
+                    event.preventDefault();
+                  }
                 }}
                 className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-gold px-5 py-3 text-base font-semibold text-[#2a2a2a] shadow-md hover:bg-[#d4af37] hover:shadow-lg transition-all duration-200"
               >
