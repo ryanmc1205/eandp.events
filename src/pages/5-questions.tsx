@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const PAGE_URL =
@@ -31,10 +32,26 @@ const LeadMagnetPage = () => {
       formData.get("email") ?? ""
     ).trim();
 
+    const marketingConsent =
+      formData.get("marketingConsent") ===
+      "yes";
+
+    if (!marketingConsent) {
+      setError(
+        "Please confirm your email consent before continuing."
+      );
+      return;
+    }
+
     setSubmitting(true);
     setError("");
 
     try {
+      const id = crypto.randomUUID();
+
+      const consentTimestamp =
+        new Date().toISOString();
+
       const response = await fetch(
         "https://hook.us1.make.com/hw0r5ihivh26pfsp8yb7ua12iigrl36x",
         {
@@ -44,8 +61,12 @@ const LeadMagnetPage = () => {
               "application/json",
           },
           body: JSON.stringify({
+            id,
             name,
             email,
+            marketingConsent: true,
+            consentTimestamp,
+            consentSource: "5-questions",
           }),
         }
       );
@@ -206,7 +227,7 @@ const LeadMagnetPage = () => {
 
             <p className="text-lg mb-8 text-gray-700">
               Most clients don’t know what
-              to ask — until it’s too late.
+              to ask until it’s too late.
               Whether you're planning a
               high-stakes corporate event
               or a once-in-a-lifetime
@@ -218,7 +239,7 @@ const LeadMagnetPage = () => {
 
             <p className="text-lg mb-8 text-gray-700">
               You’re not just looking for a
-              good planner — you’re looking
+              good planner. You’re looking
               for the right one. Someone
               who can lead under pressure,
               protect your time and values,
@@ -280,6 +301,44 @@ const LeadMagnetPage = () => {
                     required
                     className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-md"
                   />
+                </div>
+
+                <div className="text-left mb-6">
+                  <label
+                    htmlFor="marketing-consent"
+                    className="flex items-start gap-3 cursor-pointer"
+                  >
+                    <input
+                      id="marketing-consent"
+                      name="marketingConsent"
+                      type="checkbox"
+                      value="yes"
+                      required
+                      className="mt-1 h-4 w-4 shrink-0"
+                    />
+
+                    <span className="text-sm text-gray-700 leading-relaxed">
+                      Yes, send me the free
+                      guide and occasional
+                      marketing emails from
+                      E&amp;P Events with
+                      planning tips, event
+                      insights, and company
+                      updates. I understand
+                      I can unsubscribe at
+                      any time. See our{" "}
+                      <Link
+                        to="/privacy-policy"
+                        className="text-blue-600 underline hover:text-blue-800"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                        }}
+                      >
+                        Privacy Policy
+                      </Link>
+                      .
+                    </span>
+                  </label>
                 </div>
 
                 <button
