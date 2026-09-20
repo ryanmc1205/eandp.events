@@ -1,32 +1,17 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { Helmet } from "react-helmet-async";
 
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
 import FeaturedSection from "../components/FeaturedSection";
 import WhatWeDoSection from "../components/WhatWeDoSection";
+import AdditionalCtaSection from "../components/AdditionalCtaSection";
+import GallerySection from "../components/GallerySection";
+import MeetPeterSection from "../components/MeetPeterSection";
+import TestimonialSection from "../components/TestimonialSection";
+import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
 import SchemaMarkup from "../components/SchemaMarkup";
-
-const GallerySection = React.lazy(
-  () => import("../components/GallerySection")
-);
-
-const AdditionalCtaSection = React.lazy(
-  () => import("../components/AdditionalCtaSection")
-);
-
-const TestimonialSection = React.lazy(
-  () => import("../components/TestimonialSection")
-);
-
-const MeetPeterSection = React.lazy(
-  () => import("../components/MeetPeterSection")
-);
-
-const ContactSection = React.lazy(
-  () => import("../components/ContactSection")
-);
 
 const Index = () => {
   return (
@@ -106,25 +91,15 @@ const Index = () => {
 
           <WhatWeDoSection />
 
-          <Suspense fallback={<div>Loading call-to-action...</div>}>
-            <AdditionalCtaSection />
-          </Suspense>
+          <AdditionalCtaSection />
 
-          <Suspense fallback={<div>Loading gallery...</div>}>
-            <GallerySection />
-          </Suspense>
+          <GallerySection />
 
-          <Suspense fallback={<div>Loading Meet Peter...</div>}>
-            <MeetPeterSection />
-          </Suspense>
+          <MeetPeterSection />
 
-          <Suspense fallback={<div>Loading testimonials...</div>}>
-            <TestimonialSection />
-          </Suspense>
+          <TestimonialSection />
 
-          <Suspense fallback={<div>Loading contact...</div>}>
-            <ContactSection />
-          </Suspense>
+          <ContactSection />
         </main>
 
         <Footer />
