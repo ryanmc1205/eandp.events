@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Button } from "@/components/ui/button";
 import { Check, Globe, Users, Plane, Facebook, Instagram, Mail } from "lucide-react";
 import NavBarWeddings from "@/components/NavBarWeddings";
 import { weddingGalleryImages } from "@/data/weddinggallery";
@@ -82,13 +81,28 @@ const Weddings = () => {
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Indian & South Asian Wedding Planner in Atlanta | E&P Events" />
   <meta property="og:description" content="Indian & South Asian wedding planner in Atlanta specializing in Hindu, Sikh, Pakistani, Bangladeshi, and fusion weddings. We bring calm to complex celebrations through cultural fluency, thoughtful planning, and confident leadership." />
-  <meta property="og:image" content="https://eandp.events/og/weddings.jpg" />
+  <meta property="og:image" content="https://eandp.events/lovable-uploads/89a4d798-f07a-42c8-bba9-15123f9d6ecb.webp" />
 
-  {/* Twitter Card */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Indian & South Asian WeddingIndian & South Asian wedding planner in Atlanta specializing in Hindu, Sikh, Pakistani, Bangladeshi, and fusion weddings. We bring calm to complex celebrations through cultural fluency, thoughtful planning, and confident leadership. Planner in Atlanta | E&P Events" />
-  <meta name="twitter:description" content="" />
-  <meta name="twitter:image" content="https://eandp.events/og/weddings.jpg" />
+{/* Twitter Card */}
+<meta
+  name="twitter:card"
+  content="summary_large_image"
+/>
+
+<meta
+  name="twitter:title"
+  content="Indian & South Asian Wedding Planner in Atlanta | E&P Events"
+/>
+
+<meta
+  name="twitter:description"
+  content="Indian & South Asian wedding planner in Atlanta specializing in Hindu, Sikh, Pakistani, Bangladeshi, and fusion weddings. We bring calm to complex celebrations through cultural fluency, thoughtful planning, and confident leadership."
+/>
+
+<meta
+  name="twitter:image"
+  content="https://eandp.events/lovable-uploads/89a4d798-f07a-42c8-bba9-15123f9d6ecb.webp"
+/>
 </Helmet>
 
 
@@ -184,6 +198,7 @@ const Weddings = () => {
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        aria-hidden="true"
       >
         <path
           strokeLinecap="round"
@@ -469,21 +484,22 @@ const Weddings = () => {
 
             <div className="glow-button-wrapper mx-auto">
               <div className="glow-ring" />
-              <a
-                href="https://cal.com/eandp.events/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glow-button-inner"
-                onClick={() => {
-                  (window as any).gtag?.('event', 'cta_click', {
-                    button_text: 'Book Your Free Clarity Call',
-                    cta_type: 'weddings_cta',
-                    page_path: window.location.pathname,
-                  });
-                }}
-              >
-                Book Your Free Clarity Call
-              </a>
+             <a
+  href="https://cal.com/eandp.events/30min"
+  data-cal-link="eandp.events/30min"
+  data-cal-namespace="30min"
+  data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+  className="glow-button-inner"
+  onClick={() => {
+    (window as any).gtag?.("event", "cta_click", {
+      button_text: "Book Your Free Clarity Call",
+      cta_type: "weddings_cta",
+      page_path: window.location.pathname,
+    });
+  }}
+>
+  Book Your Free Clarity Call
+</a>
             </div>
 
             <div className="mt-8">
@@ -598,20 +614,14 @@ const Footer = () => {
   <p className="text-gray-300 mb-2">
               Phone: <a href="tel:17704108302" className="text-gold hover:underline">(770) 410-8302</a>
             </p>
+            <p className="text-gray-300">
+              Hoschton, GA
+            </p>
           </div>
         </div>
 
-         <div className="border-t border-gray-800 mt-12 pt-6 text-center text-sm text-gray-400">
-  <p className="flex flex-wrap justify-center items-center gap-2">
-    <span>&copy; {currentYear} E&amp;P Events. All rights reserved.</span>
-    <span className="text-gray-600">|</span>
-    <a
-      href="/privacy-policy"
-      className="text-gold hover:underline"
-    >
-      Privacy Policy
-    </a>
-  </p>
+        <div className="border-t border-gray-800 mt-12 pt-6 text-center text-sm text-gray-400">
+          <p>&copy; {currentYear} E&P Events. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -9,7 +9,10 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "generate-sitemap": "node generate-sitemap.js",
- "build": "npm run generate-sitemap && NODE_ENV=production vite build"
+    "build:client": "vite build",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr",
+    "prerender": "node scripts/prerender.mjs",
+    "build": "npm run generate-sitemap && npm run build:client && npm run build:ssr && npm run prerender"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -61,7 +64,6 @@
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.3",
-    "vite-plugin-ssr": "^0.4.50",
     "zod": "^3.23.8"
   },
   "devDependencies": {

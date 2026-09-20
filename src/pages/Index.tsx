@@ -3,24 +3,37 @@ import { Helmet } from "react-helmet-async";
 
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
+import FeaturedSection from "../components/FeaturedSection";
 import WhatWeDoSection from "../components/WhatWeDoSection";
 import Footer from "../components/Footer";
 import SchemaMarkup from "../components/SchemaMarkup";
 
-// Lazy-loaded components
-const GallerySection = React.lazy(() => import("../components/GallerySection"));
-const AdditionalCtaSection = React.lazy(() => import("../components/AdditionalCtaSection"));
-const TestimonialSection = React.lazy(() => import("../components/TestimonialSection"));
-const MeetPeterSection = React.lazy(() => import("../components/MeetPeterSection"));
-const ContactSection = React.lazy(() => import("../components/ContactSection"));
-const FeaturedSection = React.lazy(() => import("../components/FeaturedSection"));
+const GallerySection = React.lazy(
+  () => import("../components/GallerySection")
+);
+
+const AdditionalCtaSection = React.lazy(
+  () => import("../components/AdditionalCtaSection")
+);
+
+const TestimonialSection = React.lazy(
+  () => import("../components/TestimonialSection")
+);
+
+const MeetPeterSection = React.lazy(
+  () => import("../components/MeetPeterSection")
+);
+
+const ContactSection = React.lazy(
+  () => import("../components/ContactSection")
+);
 
 const Index = () => {
   return (
     <div className="relative overflow-x-hidden">
       <Helmet>
         <title>
-          Indian Wedding & Corporate Event Planner in Atlanta | E&P Events
+          Indian Wedding &amp; Corporate Event Planner in Atlanta | E&amp;P Events
         </title>
 
         <meta
@@ -28,46 +41,54 @@ const Index = () => {
           content="Indian, South Asian, fusion wedding + corporate event planning that lets you be fully present. Based in Atlanta. Trusted worldwide."
         />
 
-        {/* Canonical */}
-        <link rel="canonical" href="https://eandp.events" />
-
-        {/* Preload Hero */}
         <link
-          rel="preload"
-          as="image"
-          href="/lovable-uploads/SSTK_asset_small_new.webp"
-          type="image/webp"
+          rel="canonical"
+          href="https://eandp.events"
         />
 
-        {/* Open Graph */}
-        <meta property="og:url" content="https://eandp.events" />
-        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://eandp.events"
+        />
+
+        <meta
+          property="og:type"
+          content="website"
+        />
+
         <meta
           property="og:title"
           content="Indian Wedding & Corporate Event Planner in Atlanta | E&P Events"
         />
+
         <meta
           property="og:description"
           content="Indian, South Asian, fusion wedding + corporate event planning that lets you be fully present. Based in Atlanta. Trusted worldwide."
         />
+
         <meta
           property="og:image"
-          content="https://eandp.events/og/homepage.jpg"
+          content="https://eandp.events/lovable-uploads/SSTK_asset_small_new.webp"
         />
 
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:card"
+          content="summary_large_image"
+        />
+
         <meta
           name="twitter:title"
           content="Indian Wedding & Corporate Event Planner in Atlanta | E&P Events"
         />
+
         <meta
           name="twitter:description"
           content="Indian, South Asian, fusion wedding + corporate event planning that lets you be fully present. Based in Atlanta. Trusted worldwide."
         />
+
         <meta
           name="twitter:image"
-          content="https://eandp.events/og/homepage.jpg"
+          content="https://eandp.events/lovable-uploads/SSTK_asset_small_new.webp"
         />
       </Helmet>
 
@@ -75,18 +96,15 @@ const Index = () => {
 
       <div className="min-h-screen flex flex-col">
         <SchemaMarkup />
+
         <Navbar />
 
         <main className="flex-1 relative z-10">
           <HeroSection />
 
-          <Suspense fallback={<div>Loading featured logos...</div>}>
-            <FeaturedSection />
-          </Suspense>
+          <FeaturedSection />
 
-          <Suspense fallback={<div>Loading services...</div>}>
-            <WhatWeDoSection />
-          </Suspense>
+          <WhatWeDoSection />
 
           <Suspense fallback={<div>Loading call-to-action...</div>}>
             <AdditionalCtaSection />

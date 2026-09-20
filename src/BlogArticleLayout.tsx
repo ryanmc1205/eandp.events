@@ -1,14 +1,33 @@
+import React, { Suspense, lazy } from "react";
 import { useParams } from "react-router-dom";
-import { Suspense, lazy } from "react";
-import { getPostLoader } from "@/blogLoader"; // 👈 new auto-loader
+import { getPostLoader } from "@/blogLoader";
+
+const postComponents = new Map<
+  string,
+  React.LazyExoticComponent<React.ComponentType<any>>
+>();
+
+function getPostComponent(slug: string) {
+  const existing = postComponents.get(slug);
+  if (existing) return existing;
+
+  const loader = getPostLoader(slug);
+  if (!loader) return undefined;
+
+  const component = lazy(loader);
+  postComponents.set(slug, component);
+
+  return component;
+}
 
 const BlogArticleLayout = () => {
   const { slug = "" } = useParams();
 
-  const loader = getPostLoader(slug);
-  if (!loader) return <h2>404 – Post Not Found</h2>;
+  const PostComponent = getPostComponent(slug);
 
-  const PostComponent = lazy(loader);
+  if (!PostComponent) {
+    return <h2>404 – Post Not Found</h2>;
+  }
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

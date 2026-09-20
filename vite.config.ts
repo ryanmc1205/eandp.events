@@ -1,27 +1,32 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import path from 'path';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import path from "path";
 
-export default defineConfig(() => ({
+export default defineConfig(({ isSsrBuild }) => ({
   server: {
-    host: '::',
+    host: "::",
     port: 8080,
   },
-  plugins: [
-    react(),
-  ],
+
+  plugins: [react()],
+
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
+
+  ssr: {
+    noExternal: ["react-helmet-async"],
+  },
+
+  build: isSsrBuild
+    ? {
+        rollupOptions: {
+          output: {
+            inlineDynamicImports: true,
+          },
         },
-      },
-    },
-  },
+      }
+    : undefined,
 }));
