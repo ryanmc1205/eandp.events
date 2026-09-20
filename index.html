@@ -18,7 +18,7 @@
     type="image/webp"
   />
 
-  <!-- Cal element-click embed (global booking popup loader) -->
+  <!-- Cal embed loader -->
   <script type="text/javascript">
     (function (C, A, L) {
       let p = function (a, ar) {
@@ -82,6 +82,18 @@
     });
 
     Cal.ns["30min"]("ui", {
+      hideEventTypeDetails: false,
+      layout: "month_view"
+    });
+
+    /*
+     * Clarity call calendar
+     */
+    Cal("init", "clarity", {
+      origin: "https://app.cal.com"
+    });
+
+    Cal.ns.clarity("ui", {
       hideEventTypeDetails: false,
       layout: "month_view"
     });
