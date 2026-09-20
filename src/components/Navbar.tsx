@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { openCalModal } from "@/lib/calModal";
 
 const GENERAL_CAL_URL = "https://cal.com/eandp.events/30min";
 
@@ -16,6 +17,24 @@ const Navbar = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleBookCall = (
+    event: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    if (openCalModal("30min")) {
+      event.preventDefault();
+    }
+  };
+
+  const handleMobileBookCall = (
+    event: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    setIsMenuOpen(false);
+
+    if (openCalModal("30min")) {
+      event.preventDefault();
+    }
+  };
 
   return (
     <nav
@@ -149,12 +168,10 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Book a Call — Cal popup trigger */}
+          {/* Book a Call */}
           <a
             href={GENERAL_CAL_URL}
-            data-cal-link="eandp.events/30min"
-            data-cal-namespace="30min"
-            data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+            onClick={handleBookCall}
             className="ml-6 inline-flex items-center rounded-md bg-gold px-5 py-2 text-sm font-semibold text-[#2a2a2a] shadow-md hover:bg-[#d4af37] hover:shadow-lg transition-all duration-200"
           >
             Book a Call
@@ -264,13 +281,10 @@ const Navbar = () => {
                 </div>
               )}
 
-              {/* Mobile Book a Call — Cal popup trigger */}
+              {/* Mobile Book a Call */}
               <a
                 href={GENERAL_CAL_URL}
-                data-cal-link="eandp.events/30min"
-                data-cal-namespace="30min"
-                data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-                onClick={() => setIsMenuOpen(false)}
+                onClick={handleMobileBookCall}
                 className="mt-2 inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 text-sm font-semibold text-[#2a2a2a] shadow-md hover:bg-[#d4af37] transition-colors"
               >
                 Book a Call
